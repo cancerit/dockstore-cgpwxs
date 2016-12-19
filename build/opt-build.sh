@@ -34,7 +34,7 @@ cd /tmp/downloads
 rm -rf distro.zip /tmp/downloads/distro /tmp/hts_cache
 
 # cgpCaVEManWrapper
-curl -sSL -o distro.zip --retry 10 https://github.com/cancerit/cgpCaVEManWrapper/archive/1.10.0.zip
+curl -sSL -o distro.zip --retry 10 https://github.com/cancerit/cgpCaVEManWrapper/archive/1.10.1.zip
 mkdir /tmp/downloads/distro
 bsdtar -C /tmp/downloads/distro --strip-components 1 -xf distro.zip
 cd /tmp/downloads/distro
