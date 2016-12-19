@@ -1,4 +1,4 @@
-FROM  quay.io/wtsicgp/dockstore-cgpmap:1.0.4
+FROM  quay.io/wtsicgp/dockstore-cgpmap:1.0.5
 
 MAINTAINER  keiranmraine@gmail.com
 
