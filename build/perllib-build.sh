@@ -2,4 +2,4 @@
 
 set -eux
 
-echo "I currently do nothing, inplace to save build flow if needed later"
+echo "I currently do nothing, inplace to save build flow changes if needed later"
