@@ -46,7 +46,7 @@ ref_unpack($ref_area, $opts{'si'});
 my $run_file = $ENV{HOME}.'/run.params';
 open my $FH,'>',$run_file or die "Failed to write to $run_file: $!";
 # hard-coded
-printf $FH "PROTOCOL=WXS";
+printf $FH "PROTOCOL=WXS\n";
 # required options
 printf $FH "OUTPUT_DIR='%s'\n", $ENV{HOME};
 printf $FH "REF_BASE='%s'\n", $ref_area;
