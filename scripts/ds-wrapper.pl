@@ -84,7 +84,7 @@ printf $FH "BAM_MT='%s'\n", $opts{'t'};
 printf $FH "BAM_WT='%s'\n", $opts{'n'};
 printf $FH "PINDEL_EXCLUDE='%s'\n", $opts{'e'};
 printf $FH "SPECIES='%s'\n", $opts{'sp'};
-printf $FH "ASSEMBLY='%s'\n", $opts{'sp'};
+printf $FH "ASSEMBLY='%s'\n", $opts{'as'};
 close $FH;
 
 exec('analysisWXS.sh'); # I will never return to the perl code
