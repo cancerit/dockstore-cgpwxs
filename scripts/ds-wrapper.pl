@@ -33,6 +33,36 @@ pod2usage(-verbose => 2, -exitval => 0) if(defined $opts{'m'});
 
 delete $opts{'h'};
 delete $opts{'m'};
+delete $opts{'sp'} if(! defined $opts{'sp'}  || length $opts{'sp'} == 0);
+delete $opts{'as'} if(! defined $opts{'as'}  || length $opts{'as'} == 0);
+
+## read species/assembly from bam headers
+my ($mt_species, $mt_assembly) = species_assembly_from_xam($opts{'t'});
+my ($wt_species, $wt_assembly) = species_assembly_from_xam($opts{'n'});
+if($mt_species ne $wt_species) {
+  warn "WARN: Species mismatch between T/N [CR|B]AM headers\n";
+  if(!defined $opts{'sp'}) {
+    die "ERROR: Please define species to handle this mismatch\n";
+  }
+}
+elsif($mt_species eq q{}) {
+  die "ERROR: Please define species, not found in [CR|B]AM headers.\n";
+}
+elsif(!defined $opts{'sp'}) {
+  $opts{'sp'} = $mt_species;
+}
+if($mt_assembly ne $wt_assembly) {
+  warn "WARN: Assembly mismatch between T/N [CR|B]AM headers\n";
+  if(!defined $opts{'as'}) {
+    die "ERROR: Please define assembly to handle this mismatch\n";
+  }
+}
+elsif($mt_assembly eq q{}) {
+  die "ERROR: Please define assembly, not found in [CR|B]AM headers.\n";
+}
+elsif(!defined $opts{'as'}) {
+  $opts{'as'} = $mt_assembly;
+}
 
 printf "Options loaded: \n%s\n",Dumper(\%opts);
 
@@ -53,12 +83,47 @@ printf $FH "REF_BASE='%s'\n", $ref_area;
 printf $FH "BAM_MT='%s'\n", $opts{'t'};
 printf $FH "BAM_WT='%s'\n", $opts{'n'};
 printf $FH "PINDEL_EXCLUDE='%s'\n", $opts{'e'};
-# optional
-printf $FH "SPECIES='%s'\n", $opts{'sp'} if(defined $opts{'sp'} && length $opts{'sp'} > 0);
-printf $FH "ASSEMBLY='%s'\n", $opts{'sp'} if(defined $opts{'as'} && length $opts{'as'} > 0);
+printf $FH "SPECIES='%s'\n", $opts{'sp'};
+printf $FH "ASSEMBLY='%s'\n", $opts{'sp'};
 close $FH;
 
 exec('analysisWXS.sh'); # I will never return to the perl code
+
+sub species_assembly_from_xam {
+  my $xam = shift;
+  my %assembly_set;
+  my %species_set;
+  open my $SAM, '-|', "samtools view -H $xam" or die $!;
+  while(my $line = <$SAM>) {
+    next unless($line =~ m/^\@SQ/);
+    chomp $line;
+    $line .= "\t"; # simplify matching
+    if($line =~ m/\tAS:([^\t]+)\t/) {
+      $assembly_set{$1}++;
+    }
+    if($line =~ m/\SP:([^\t]+)\t/) {
+      $species_set{$1}++;
+    }
+  }
+  close $SAM;
+  my $species = q{};
+  my $max_val = 0;
+  for(keys %species_set) {
+    if($species_set{$_} > $max_val) {
+      $max_val = $species_set{$_};
+      $species = $_;
+    }
+  }
+  my $assembly = q{};
+  $max_val = 0;
+  for(keys %assembly_set) {
+    if($assembly_set{$_} > $max_val) {
+      $max_val = $assembly_set{$_};
+      $assembly = $_;
+    }
+  }
+  return ($species, $assembly);
+}
 
 sub ref_unpack {
   my ($ref_area, $item) = @_;
@@ -123,6 +188,20 @@ Path to tumour BAM or CRAM file with co-located index and BAS file.
 =item B<-normal>
 
 Path to normal BAM or CRAM file with co-located index and BAS file.
+
+=item B<-exclude>
+
+Contigs to be excluded from Pindel analysis, csv, use '%' for wildcard.
+
+=item B<-species>
+
+Specify overriding species, by default will select the most prevelant entry in
+[CR|B]AM header (to cope with inclusion of viral/decoy sequences).
+
+=item B<-assembly>
+
+Specify overriding assembly, by default will select the most prevelant entry in
+[CR|B]AM header (to cope with inclusion of viral/decoy sequences).
 
 =back
 
