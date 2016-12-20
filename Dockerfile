@@ -12,9 +12,9 @@ ENV OPT /opt/wtsi-cgp
 ENV PATH $OPT/bin:$PATH
 ENV PERL5LIB $OPT/lib/perl5
 
-#ADD scripts/mapping.sh $OPT/bin/mapping.sh
-#ADD scripts/ds-wrapper.pl $OPT/bin/ds-wrapper.pl
-#RUN chmod a+x $OPT/bin/mapping.sh $OPT/bin/ds-wrapper.pl
+ADD scripts/analysisWXS.sh $OPT/bin/analysisWXS.sh
+ADD scripts/ds-wrapper.pl $OPT/bin/ds-wrapper.pl
+RUN chmod a+x $OPT/bin/analysisWXS.sh $OPT/bin/ds-wrapper.pl
 
 ADD build/apt-build.sh build/
 ADD build/perllib-build.sh build/
