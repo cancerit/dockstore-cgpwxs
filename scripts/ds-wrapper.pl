@@ -26,6 +26,7 @@ GetOptions( 'h|help' => \$opts{'h'},
             'e|exclude=s' => \$opts{'e'},
             'sp|species=s' => \$opts{'sp'},
             'as|assembly=s' => \$opts{'as'},
+            'sf|snvflag=s' => \$opts{'sf'},
 ) or pod2usage(2);
 
 pod2usage(-verbose => 1, -exitval => 0) if(defined $opts{'h'});
@@ -73,6 +74,9 @@ ref_unpack($ref_area, $opts{'r'});
 ref_unpack($ref_area, $opts{'a'});
 ref_unpack($ref_area, $opts{'si'});
 
+## now complete the caveman flaging file correctly
+my $ini = add_species_flag_ini($opts{'sp'}, "$ref_area/caveman/flag.vcf.config.WXS.ini");
+
 my $run_file = $ENV{HOME}.'/run.params';
 open my $FH,'>',$run_file or die "Failed to write to $run_file: $!";
 # hard-coded
@@ -85,9 +89,25 @@ printf $FH "BAM_WT='%s'\n", $opts{'n'};
 printf $FH "PINDEL_EXCLUDE='%s'\n", $opts{'e'};
 printf $FH "SPECIES='%s'\n", $opts{'sp'};
 printf $FH "ASSEMBLY='%s'\n", $opts{'as'};
+printf $FH "SNVFLAG='%s'\n", $ini;
 close $FH;
 
 exec('analysisWXS.sh'); # I will never return to the perl code
+
+sub add_species_flag_ini {
+  my ($species, $ini_in) = @_;
+  $species =~ s/ /_/g;
+  my $ini_out = '/tmp/flag.vcf.config.WXS.ini';
+  open my $IN, '<', $ini_in;
+  open my $OUT,'>',$ini_out;
+  while(my $line = <$IN>) {
+    $line =~ s/^\[/[$species/;
+    print $OUT $line;
+  }
+  close $OUT;
+  close $IN;
+  return $ini_out;
+}
 
 sub species_assembly_from_xam {
   my $xam = shift;
@@ -153,7 +173,7 @@ dh-wrapper.pl [options] [file(s)...]
     -exclude     -e   Exclude these contigs from pindel analysis
                         e.g. NC_007605,hs37d5,GL%
 
-  Optional parameters (if not found in BAM headers):
+  Optional parameters
     -species     -sp  Species name (may require quoting)
     -assembly    -a   Reference assembly
 

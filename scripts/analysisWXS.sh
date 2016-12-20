@@ -179,7 +179,7 @@ do_parallel[CaVEMan]="caveman.pl \
  -td 5 -nd 2 \
  -tb $BAM_MT_TMP \
  -nb $BAM_WT_TMP \
- -c $REF_BASE/caveman/flagging/flag.vcf.config.ini \
+ -c $SNVFLAG \
  -f $REF_BASE/caveman/flagging/flag.to.vcf.convert.ini \
  -o $OUTPUT_DIR/${NAME_MT}_vs_${NAME_WT}/caveman"
 
