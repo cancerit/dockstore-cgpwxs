@@ -88,20 +88,20 @@ inputs:
     doc: "Species to apply if not found in BAM headers"
     default: ''
     inputBinding:
-    prefix: -species
-    position: 7
-    separate: true
-    shellQuote: true
+      prefix: -species
+      position: 7
+      separate: true
+      shellQuote: true
 
   assembly:
     type: string?
     doc: "Assembly to apply if not found in BAM headers"
     default: ''
     inputBinding:
-    prefix: -assembly
-    position: 8
-    separate: true
-    shellQuote: true
+      prefix: -assembly
+      position: 8
+      separate: true
+      shellQuote: true
 
 outputs:
   result_archive:
