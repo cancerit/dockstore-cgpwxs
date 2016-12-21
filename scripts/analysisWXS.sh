@@ -211,7 +211,7 @@ run_parallel $CPU do_parallel
 rm -rf $OUTPUT_DIR/${NAME_MT}_vs_${NAME_WT}/*/logs
 
 echo 'Package results'
-tar -C $OUTPUT_DIR -zcf result_${PROTOCOL}_${NAME_MT}_vs_${NAME_WT}.tar.gz ${NAME_MT}_vs_${NAME_WT} ${NAME_MT} ${NAME_WT}
+tar -C $OUTPUT_DIR -zcf result_${PROTOCOL}_${NAME_MT}_vs_${NAME_WT}.tar.gz ${NAME_MT}_vs_${NAME_WT}
 
 # run any post-exec step
 echo -e "\nRun POST_EXEC: `date`"
