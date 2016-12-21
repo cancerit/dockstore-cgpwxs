@@ -104,9 +104,35 @@ inputs:
       shellQuote: true
 
 outputs:
+  run_params:
+    type: File
+    outputBinding:
+      glob: WXS_*_vs_*.run.params
+
   result_archive:
     type: File
     outputBinding:
-      glob: result_WXS_*_vs_*.tar.gz
+      glob: WXS_*_vs_*.tar.gz
+
+  # named like this so can be converted to a secondaryFile set once supported by dockstore cli
+  time_cgpPindel:
+    type: File
+    outputBinding:
+      glob:  WXS_*_vs_*.time.cgpPindel
+
+  time_cgpPindel_annot:
+    type: File
+    outputBinding:
+      glob:  WXS_*_vs_*.time.cgpPindel_annot
+
+  time_CaVEMan:
+    type: File
+    outputBinding:
+      glob:  WXS_*_vs_*.time.CaVEMan
+
+  time_CaVEMan_annot:
+    type: File
+    outputBinding:
+      glob:  WXS_*_vs_*.time.CaVEMan_annot
 
 baseCommand: ["/opt/wtsi-cgp/bin/ds-wrapper.pl"]

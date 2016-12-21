@@ -16,7 +16,7 @@ run_parallel () {
       sleep 1 # gnu sleep allows floating point here...
     done
 
-    CMD='/usr/bin/time -f '$TIME_FORMAT' -o '$OUTPUT_DIR'/'$key'.time '${do_parallel[$key]}
+    CMD="/usr/bin/time -f $TIME_FORMAT -o $OUTPUT_DIR/${PROTOCOL}_${NAME_MT}_vs_${NAME_WT}.time.$key ${do_parallel[$key]}"
 
     echo -e "\tStarting $key"
     set -x
@@ -139,8 +139,8 @@ declare -A do_parallel
 
 echo -e "\nSetting up Parallel block 2"
 
-echo -e "\t[Parallel block 2] Pindel added..."
-do_parallel[pindel]="pindel.pl \
+echo -e "\t[Parallel block 2] cgpPindel added..."
+do_parallel[cgpPindel]="pindel.pl \
  -o $OUTPUT_DIR/${NAME_MT}_vs_${NAME_WT}/pindel \
  -r $REF_BASE/genome.fa \
  -t $BAM_MT_TMP \
@@ -193,7 +193,7 @@ declare -A do_parallel
 # annotate pindel
 rm -f $OUTPUT_DIR/${NAME_MT}_vs_${NAME_WT}/pindel/${NAME_MT}_vs_${NAME_WT}.annot.vcf.gz*
 echo -e "\t[Parallel block 3] Pindel_annot added..."
-do_parallel[Pindel_annot]="AnnotateVcf.pl -t -c $REF_BASE/vagrent/vagrent.cache.gz \
+do_parallel[cgpPindel_annot]="AnnotateVcf.pl -t -c $REF_BASE/vagrent/vagrent.cache.gz \
  -i $OUTPUT_DIR/${NAME_MT}_vs_${NAME_WT}/pindel/${NAME_MT}_vs_${NAME_WT}.flagged.vcf.gz \
  -o $OUTPUT_DIR/${NAME_MT}_vs_${NAME_WT}/pindel/${NAME_MT}_vs_${NAME_WT}.annot.vcf"
 
@@ -211,7 +211,8 @@ run_parallel $CPU do_parallel
 rm -rf $OUTPUT_DIR/${NAME_MT}_vs_${NAME_WT}/*/logs
 
 echo 'Package results'
-tar -C $OUTPUT_DIR -zcf result_${PROTOCOL}_${NAME_MT}_vs_${NAME_WT}.tar.gz ${NAME_MT}_vs_${NAME_WT}
+tar -C $OUTPUT_DIR -zcf ${PROTOCOL}_${NAME_MT}_vs_${NAME_WT}.tar.gz ${NAME_MT}_vs_${NAME_WT}
+cp $PARAM_FILE ${PROTOCOL}_${NAME_MT}_vs_${NAME_WT}.run.params
 
 # run any post-exec step
 echo -e "\nRun POST_EXEC: `date`"
