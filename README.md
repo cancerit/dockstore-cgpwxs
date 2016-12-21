@@ -12,6 +12,9 @@ Required input files are
 
 Inputs 1&2 are expected to have been mapped using [dockstore-cgpmap](https://dockstore.org/containers/quay.io/wtsicgp/dockstore-cgpmap).
 
+The data linked in the 'examples' area is a tiny section of chr21 from the cell line COLO-829.  This will generate a small number of INDEL and SNV variants.
+All the SNV variants do not pass filtering (several only fail as not in a gene footprint, 'F009').
+
 Please check the Wiki then raise an issue if you require additional information on how to generate your own reference files.  Much of this information is available on the individual algorithm pages.
 
 Release process
