@@ -26,8 +26,8 @@ This project is maintained using HubFlow.
 3. Push changes
 4. Check state on Travis
 5. Generate the release (add notes to GitHub)
-6. Confirm that image has been built on [quay.io](https://quay.io/repository/wtsicgp/dockstore-cgpmap?tab=builds)
-7. Update the [dockstore](https://dockstore.org/containers/quay.io/wtsicgp/dockstore-cgpmap) entry, see [their docs](https://dockstore.org/docs/getting-started-with-dockstore).
+6. Confirm that image has been built on [quay.io](https://quay.io/repository/wtsicgp/dockstore-cgpwxs?tab=builds)
+7. Update the [dockstore](https://dockstore.org/containers/quay.io/wtsicgp/dockstore-cgpwxs) entry, see [their docs](https://dockstore.org/docs/getting-started-with-dockstore).
 
 LICENCE
 =======
