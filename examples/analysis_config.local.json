@@ -24,20 +24,8 @@
     "path": "/tmp/result_WXS.tar.gz",
     "class": "File"
   },
-  "time_cgpPindel": {
-    "path": "/tmp/time.cgpPindel",
-    "class": "File"
-  },
-  "time_cgpPindel_annot": {
-    "path": "/tmp/time.cgpPindel_annot",
-    "class": "File"
-  },
-  "time_CaVEMan": {
-    "path": "/tmp/time.CaVEMan",
-    "class": "File"
-  },
-  "time_CaVEMan_annot": {
-    "path": "/tmp/time.CaVEMan_annot",
+  "timings": {
+    "path": "/tmp/timings_WXS.tar.gz",
     "class": "File"
   }
 }

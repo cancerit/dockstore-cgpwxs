@@ -1,9 +1,9 @@
-FROM  quay.io/wtsicgp/dockstore-cgpmap:1.0.6
+FROM  quay.io/wtsicgp/dockstore-cgpmap:1.0.7
 
 MAINTAINER  keiranmraine@gmail.com
 
 LABEL uk.ac.sanger.cgp="Cancer Genome Project, Wellcome Trust Sanger Institute" \
-      version="1.0.1" \
+      version="1.0.2" \
       description="The CGP WXS pipeline for dockstore.org"
 
 USER  root
@@ -13,11 +13,12 @@ ENV PATH $OPT/bin:$PATH
 ENV PERL5LIB $OPT/lib/perl5
 
 ADD build/apt-build.sh build/
-ADD build/perllib-build.sh build/
-ADD build/opt-build.sh build/
-
 RUN bash build/apt-build.sh
+
+ADD build/perllib-build.sh build/
 RUN bash build/perllib-build.sh
+
+ADD build/opt-build.sh build/
 RUN bash build/opt-build.sh
 
 ADD scripts/analysisWXS.sh $OPT/bin/analysisWXS.sh
