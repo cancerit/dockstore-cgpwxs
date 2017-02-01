@@ -16,7 +16,7 @@ run_parallel () {
       sleep 1 # gnu sleep allows floating point here...
     done
 
-    CMD="/usr/bin/time -f $TIME_FORMAT -o $OUTPUT_DIR/${PROTOCOL}_${NAME_MT}_vs_${NAME_WT}.time.$key ${do_parallel[$key]}"
+    CMD="/usr/bin/time -f $TIME_FORMAT -o $OUTPUT_DIR/timings/${PROTOCOL}_${NAME_MT}_vs_${NAME_WT}.time.$key ${do_parallel[$key]}"
 
     echo -e "\tStarting $key"
     set -x
@@ -62,8 +62,9 @@ if [ ! -f $PARAM_FILE ]; then
 fi
 source $PARAM_FILE
 
-TMP=$OUTPUT_DIR/tmp
+TMP=$OUTPUT_DIR/timings
 mkdir -p $TMP
+mkdir -p $OUTPUT_DIR/
 
 if [ -z ${CPU+x} ]; then
   CPU=`grep -c ^processor /proc/cpuinfo`
@@ -211,6 +212,8 @@ run_parallel $CPU do_parallel
 rm -rf $OUTPUT_DIR/${NAME_MT}_vs_${NAME_WT}/*/logs
 
 echo 'Package results'
+# timings first
+tar -C $OUTPUT_DIR -zcf ${PROTOCOL}_${NAME_MT}_vs_${NAME_WT}_timings.tar.gz timings
 tar -C $OUTPUT_DIR -zcf ${PROTOCOL}_${NAME_MT}_vs_${NAME_WT}.tar.gz ${NAME_MT}_vs_${NAME_WT}
 cp $PARAM_FILE ${PROTOCOL}_${NAME_MT}_vs_${NAME_WT}.run.params
 
