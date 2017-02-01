@@ -112,7 +112,7 @@ outputs:
   result_archive:
     type: File
     outputBinding:
-      glob: WXS_*_vs_*.tar.gz
+      glob: WXS_*_vs_*.result.tar.gz
 
   # named like this so can be converted to a secondaryFile set once supported by dockstore cli
   timings:

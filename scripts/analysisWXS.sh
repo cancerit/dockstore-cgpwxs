@@ -62,9 +62,9 @@ if [ ! -f $PARAM_FILE ]; then
 fi
 source $PARAM_FILE
 
-TMP=$OUTPUT_DIR/timings
+TMP=$OUTPUT_DIR/tmp
 mkdir -p $TMP
-mkdir -p $OUTPUT_DIR/
+mkdir -p $OUTPUT_DIR/timings
 
 if [ -z ${CPU+x} ]; then
   CPU=`grep -c ^processor /proc/cpuinfo`
@@ -213,8 +213,8 @@ rm -rf $OUTPUT_DIR/${NAME_MT}_vs_${NAME_WT}/*/logs
 
 echo 'Package results'
 # timings first
-tar -C $OUTPUT_DIR -zcf ${PROTOCOL}_${NAME_MT}_vs_${NAME_WT}_timings.tar.gz timings
-tar -C $OUTPUT_DIR -zcf ${PROTOCOL}_${NAME_MT}_vs_${NAME_WT}.tar.gz ${NAME_MT}_vs_${NAME_WT}
+tar -C $OUTPUT_DIR -zcf ${PROTOCOL}_${NAME_MT}_vs_${NAME_WT}.timings.tar.gz timings
+tar -C $OUTPUT_DIR -zcf ${PROTOCOL}_${NAME_MT}_vs_${NAME_WT}.result.tar.gz ${NAME_MT}_vs_${NAME_WT}
 cp $PARAM_FILE ${PROTOCOL}_${NAME_MT}_vs_${NAME_WT}.run.params
 
 # run any post-exec step
