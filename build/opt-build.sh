@@ -1,54 +1,60 @@
 #!/bin/bash
 
-set -uxe
+set -xe
 
-mkdir -p /tmp/downloads
+if [[ -z "${TMPDIR}" ]]; then
+  TMPDIR=/tmp
+fi
 
-cd /tmp/downloads
+set -u
+
+mkdir -p $TMPDIR/downloads
+
+cd $TMPDIR/downloads
 
 # cgpVcf
 curl -sSL -o distro.zip --retry 10 https://github.com/cancerit/cgpVcf/archive/v2.1.1.zip
-mkdir /tmp/downloads/distro
-bsdtar -C /tmp/downloads/distro --strip-components 1 -xf distro.zip
-cd /tmp/downloads/distro
+mkdir $TMPDIR/downloads/distro
+bsdtar -C $TMPDIR/downloads/distro --strip-components 1 -xf distro.zip
+cd $TMPDIR/downloads/distro
 ./setup.sh $OPT
-cd /tmp/downloads
-rm -rf distro.zip /tmp/downloads/distro /tmp/hts_cache
+cd $TMPDIR/downloads
+rm -rf distro.zip $TMPDIR/downloads/distro /tmp/hts_cache
 
 # cgpPindel
 curl -sSL -o distro.zip --retry 10 https://github.com/cancerit/cgpPindel/archive/v2.1.0.zip
-mkdir /tmp/downloads/distro
-bsdtar -C /tmp/downloads/distro --strip-components 1 -xf distro.zip
-cd /tmp/downloads/distro
+mkdir $TMPDIR/downloads/distro
+bsdtar -C $TMPDIR/downloads/distro --strip-components 1 -xf distro.zip
+cd $TMPDIR/downloads/distro
 ./setup.sh $OPT
-cd /tmp/downloads
-rm -rf distro.zip /tmp/downloads/distro /tmp/hts_cache
+cd $TMPDIR/downloads
+rm -rf distro.zip $TMPDIR/downloads/distro /tmp/hts_cache
 
 # cgpCaVEManPostProcessing
 curl -sSL -o distro.zip --retry 10 https://github.com/cancerit/cgpCaVEManPostProcessing/archive/1.6.6.zip
-mkdir /tmp/downloads/distro
-bsdtar -C /tmp/downloads/distro --strip-components 1 -xf distro.zip
-cd /tmp/downloads/distro
+mkdir $TMPDIR/downloads/distro
+bsdtar -C $TMPDIR/downloads/distro --strip-components 1 -xf distro.zip
+cd $TMPDIR/downloads/distro
 ./setup.sh $OPT
-cd /tmp/downloads
-rm -rf distro.zip /tmp/downloads/distro /tmp/hts_cache
+cd $TMPDIR/downloads
+rm -rf distro.zip $TMPDIR/downloads/distro /tmp/hts_cache
 
 # cgpCaVEManWrapper
-curl -sSL -o distro.zip --retry 10 https://github.com/cancerit/cgpCaVEManWrapper/archive/1.10.1.zip
-mkdir /tmp/downloads/distro
-bsdtar -C /tmp/downloads/distro --strip-components 1 -xf distro.zip
-cd /tmp/downloads/distro
+curl -sSL -o distro.zip --retry 10 https://github.com/cancerit/cgpCaVEManWrapper/archive/1.10.2.zip
+mkdir $TMPDIR/downloads/distro
+bsdtar -C $TMPDIR/downloads/distro --strip-components 1 -xf distro.zip
+cd $TMPDIR/downloads/distro
 ./setup.sh $OPT
-cd /tmp/downloads
-rm -rf distro.zip /tmp/downloads/distro /tmp/hts_cache
+cd $TMPDIR/downloads
+rm -rf distro.zip $TMPDIR/downloads/distro /tmp/hts_cache
 
 # VAGrENT
-curl -sSL -o distro.zip --retry 10 https://github.com/cancerit/VAGrENT/archive/v3.2.0.zip
-mkdir /tmp/downloads/distro
-bsdtar -C /tmp/downloads/distro --strip-components 1 -xf distro.zip
-cd /tmp/downloads/distro
+curl -sSL -o distro.zip --retry 10 https://github.com/cancerit/VAGrENT/archive/v3.2.1.zip
+mkdir $TMPDIR/downloads/distro
+bsdtar -C $TMPDIR/downloads/distro --strip-components 1 -xf distro.zip
+cd $TMPDIR/downloads/distro
 ./setup.sh $OPT
-cd /tmp/downloads
-rm -rf distro.zip /tmp/downloads/distro /tmp/hts_cache
+cd $TMPDIR/downloads
+rm -rf distro.zip $TMPDIR/downloads/distro /tmp/hts_cache
 
-rm -rf /tmp/downloads
+rm -rf $TMPDIR/downloads
