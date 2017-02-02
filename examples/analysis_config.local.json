@@ -29,7 +29,7 @@
     "class": "File"
   },
   "run_params": {
-    "path": "/tmp/params_WGS.params",
+    "path": "/tmp/params_WXS.params",
     "class": "File"
   }
 }
