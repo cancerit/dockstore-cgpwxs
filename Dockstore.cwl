@@ -19,7 +19,7 @@ dct:creator:
 
 requirements:
   - class: DockerRequirement
-    dockerPull: "quay.io/wtsicgp/dockstore-cgpwxs:1.0.2"
+    dockerPull: "quay.io/wtsicgp/dockstore-cgpwxs:1.0.3"
 
 hints:
   - class: ResourceRequirement
@@ -107,7 +107,7 @@ outputs:
   run_params:
     type: File
     outputBinding:
-      glob: WXS_*_vs_*.run.params
+      glob: run.params
 
   result_archive:
     type: File
