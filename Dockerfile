@@ -1,4 +1,4 @@
-FROM  quay.io/wtsicgp/dockstore-cgpmap:1.0.8
+FROM  quay.io/wtsicgp/dockstore-cgpmap:2.0.0
 
 MAINTAINER  keiranmraine@gmail.com
 
@@ -11,6 +11,7 @@ USER  root
 ENV OPT /opt/wtsi-cgp
 ENV PATH $OPT/bin:$PATH
 ENV PERL5LIB $OPT/lib/perl5
+ENV LD_LIBRARY_PATH $OPT/lib
 
 ADD build/apt-build.sh build/
 RUN bash build/apt-build.sh
@@ -19,7 +20,7 @@ ADD build/perllib-build.sh build/
 RUN bash build/perllib-build.sh
 
 ADD build/opt-build.sh build/
-RUN bash build/opt-build.sh
+RUN bash build/opt-build.sh $OPT
 
 ADD scripts/analysisWXS.sh $OPT/bin/analysisWXS.sh
 ADD scripts/ds-wrapper.pl $OPT/bin/ds-wrapper.pl

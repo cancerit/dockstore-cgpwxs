@@ -102,11 +102,12 @@ exec('analysisWXS.sh'); # I will never return to the perl code
 sub add_species_flag_ini {
   my ($species, $ini_in) = @_;
   $species =~ s/ /_/g;
+  $species = uc $species;
   my $ini_out = $ENV{HOME}.'/flag.vcf.config.WXS.ini';
   open my $IN, '<', $ini_in;
   open my $OUT,'>',$ini_out;
   while(my $line = <$IN>) {
-    $line =~ s/^\[/[$species/;
+    $line =~ s/^\[HUMAN_/[${species}_/;
     print $OUT $line;
   }
   close $OUT;
