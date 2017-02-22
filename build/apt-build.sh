@@ -2,4 +2,4 @@
 
 set -eux
 
-echo "I currently do nothing, inplace to save build flow changes if needed later"
+apt-get install -qy --no-install-recommends python

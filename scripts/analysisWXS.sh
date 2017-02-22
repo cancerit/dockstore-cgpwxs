@@ -182,7 +182,9 @@ do_parallel[CaVEMan]="caveman.pl \
  -nb $BAM_WT_TMP \
  -c $SNVFLAG \
  -f $REF_BASE/caveman/flagging/flag.to.vcf.convert.ini \
- -o $OUTPUT_DIR/${NAME_MT}_vs_${NAME_WT}/caveman"
+ -o $OUTPUT_DIR/${NAME_MT}_vs_${NAME_WT}/caveman \
+ -np $PROTOCOL \
+ -tp $PROTOCOL"
 
 echo "Starting Parallel block 2: `date`"
 run_parallel $CPU do_parallel
