@@ -17,6 +17,8 @@ VER_CGPPINDEL="v2.1.0"
 
 # cgpCaVEManPostProcessing
 VER_CGPCAVEPOSTPROC="1.6.8"
+# Warning bedtools 2.24.0 and 2.25.0 have a swapped usage in coverageBed
+# No upgrades until [this ticket](https://github.com/arq5x/bedtools2/issues/319) is resolved
 VER_BEDTOOLS="2.21.0"
 
 # cgpCaVEManWrapper
