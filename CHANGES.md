@@ -2,7 +2,7 @@
 * Test data in `examples/analysis_config.local.json` moved to a non-expiring location.
 
 ### 2.0.0
-* See [dockstore-cgp:2.0.0](https://github.com/cancerit/dockstore-cgpmap/releases/tag/2.0.0)
+* See [dockstore-cgpmap:2.0.0](https://github.com/cancerit/dockstore-cgpmap/releases/tag/2.0.0)
 * Streamlined install process to reduce build time and size of image.
 * Fix to SNV flagging - was not being applied previously.
 
