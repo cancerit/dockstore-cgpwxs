@@ -3,7 +3,7 @@ FROM  quay.io/wtsicgp/dockstore-cgpmap:2.0.1
 MAINTAINER  keiranmraine@gmail.com
 
 LABEL uk.ac.sanger.cgp="Cancer Genome Project, Wellcome Trust Sanger Institute" \
-      version="2.0.2" \
+      version="2.0.3" \
       description="The CGP WXS pipeline for dockstore.org"
 
 USER  root

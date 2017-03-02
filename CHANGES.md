@@ -1,3 +1,6 @@
+### 2.0.3
+* Fixed cgpPindel
+
 ### 2.0.2
 * Update cgpPindel to reduce usage of Capture::Tiny apparent cause of some failures.
 
