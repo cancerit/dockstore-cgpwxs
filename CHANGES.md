@@ -1,3 +1,6 @@
+### 2.0.2
+* Update cgpPindel to reduce usage of Capture::Tiny apparent cause of some failures.
+
 ### 2.0.1
 * Test data in `examples/analysis_config.local.json` moved to a non-expiring location.
 
