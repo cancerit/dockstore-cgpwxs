@@ -1,3 +1,6 @@
+### 2.0.5
+Very minor modifications to reduce potential issues from CPU oversubscription.
+
 ### 2.0.4
 Large reduction in temp space and I/O for cgpPindel.  See [cgpPindel-v2.2.0](https://github.com/cancerit/cgpPindel/releases/tag/v2.2.0)
 
