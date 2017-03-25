@@ -61,6 +61,7 @@ if [ ! -f $PARAM_FILE ]; then
   exit 1
 fi
 source $PARAM_FILE
+env
 
 TMP=$OUTPUT_DIR/tmp
 mkdir -p $TMP
