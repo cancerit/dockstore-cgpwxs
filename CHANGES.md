@@ -1,3 +1,7 @@
+### 2.0.6
+* Update base image to dockstore-cgpmap:2.0.3 (new PCAP-core for load management)
+* Bump cgpCaVEManWrapper to gain access to split size tuning (not used here)
+
 ### 2.0.5
 Very minor modifications to reduce potential issues from CPU oversubscription.
 
