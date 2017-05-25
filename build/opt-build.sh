@@ -13,7 +13,7 @@ VER_CGPVCF="v2.2.0"
 VER_VCFTOOLS="0.1.14"
 
 # cgpPindel
-VER_CGPPINDEL="v2.2.0"
+VER_CGPPINDEL="v2.2.3"
 
 # cgpCaVEManPostProcessing
 VER_CGPCAVEPOSTPROC="1.6.8"

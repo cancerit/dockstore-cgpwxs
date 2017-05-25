@@ -1,3 +1,6 @@
+### 2.0.7
+* Bumps cgpPindel to [v2.2.3](https://github.com/cancerit/cgpPindel/releases/tag/v2.2.3) to fix bug in DI event collation.
+
 ### 2.0.6
 * Update base image to dockstore-cgpmap:2.0.3 (new PCAP-core for load management)
 * Bump cgpCaVEManWrapper to gain access to split size tuning (not used here)
