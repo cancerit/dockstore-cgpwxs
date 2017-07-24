@@ -13,10 +13,10 @@ VER_CGPVCF="v2.2.0"
 VER_VCFTOOLS="0.1.14"
 
 # cgpPindel
-VER_CGPPINDEL="v2.2.3"
+VER_CGPPINDEL="v2.2.4"
 
 # cgpCaVEManPostProcessing
-VER_CGPCAVEPOSTPROC="1.6.8"
+VER_CGPCAVEPOSTPROC="1.6.9"
 # Warning bedtools 2.24.0 and 2.25.0 have a swapped usage in coverageBed
 # No upgrades until [this ticket](https://github.com/arq5x/bedtools2/issues/319) is resolved
 VER_BEDTOOLS="2.21.0"
@@ -26,7 +26,7 @@ VER_CGPCAVEWRAP="1.11.0"
 VER_CAVEMAN="1.11.3"
 
 # VAGrENT
-VER_VAGRENT="v3.2.1"
+VER_VAGRENT="v3.2.2"
 
 if [ "$#" -lt "1" ] ; then
   echo "Please provide an installation path such as /opt/ICGC"
