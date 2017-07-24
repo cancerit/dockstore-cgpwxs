@@ -1,3 +1,7 @@
+### 2.1.0
+* Fixes various sort order issues in CaVEMan, cgpPindel and VAGrENT affecting
+comparison of results from same inputs.
+
 ### 2.0.7
 * Bumps cgpPindel to [v2.2.3](https://github.com/cancerit/cgpPindel/releases/tag/v2.2.3) to fix bug in DI event collation.
 
