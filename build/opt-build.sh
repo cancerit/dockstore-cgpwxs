@@ -22,11 +22,11 @@ VER_CGPCAVEPOSTPROC="1.6.9"
 VER_BEDTOOLS="2.21.0"
 
 # cgpCaVEManWrapper
-VER_CGPCAVEWRAP="1.11.0"
-VER_CAVEMAN="1.11.3"
+VER_CGPCAVEWRAP="1.12.0"
+VER_CAVEMAN="1.12.0"
 
 # VAGrENT
-VER_VAGRENT="v3.2.2"
+VER_VAGRENT="v3.2.3"
 
 if [ "$#" -lt "1" ] ; then
   echo "Please provide an installation path such as /opt/ICGC"
