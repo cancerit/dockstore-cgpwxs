@@ -1,5 +1,5 @@
-dockstore-cgpwxs
-======
+# dockstore-cgpwxs
+
 `dockstore-cgpwxs` provides a complete multi threaded WXS analysis for SNV and INDEL variants with associated annotation of VCF files.  This has been packaged specifically for use with the [Dockstore.org](https://dockstore.org/) framework.
 
 [![Docker Repository on Quay](https://quay.io/repository/wtsicgp/dockstore-cgpwxs/status "Docker Repository on Quay")](https://quay.io/repository/wtsicgp/dockstore-cgpwxs)
@@ -10,10 +10,10 @@ dockstore-cgpwxs
 Required input files are
 
 1. Tumour BAM file
-2. Normal BAM file
-3. Core reference archive (e.g. [core_ref_GRCh37d5.tar.gz](ftp://ftp.sanger.ac.uk/pub/cancer/dockstore/human/))
-4. WXS reference archive (e.g. [SNV_INDEL_ref_GRCh37d5.tar.gz](ftp://ftp.sanger.ac.uk/pub/cancer/dockstore/human/))
-5. VAGrENT (annotation) reference archive (e.g. [VAGrENT_ref_GRCh37d5_ensembl_75.tar.gz](ftp://ftp.sanger.ac.uk/pub/cancer/dockstore/human/))
+1. Normal BAM file
+1. Core reference archive (e.g. [core_ref_GRCh37d5.tar.gz](ftp://ftp.sanger.ac.uk/pub/cancer/dockstore/human/))
+1. WXS reference archive (e.g. [SNV_INDEL_ref_GRCh37d5.tar.gz](ftp://ftp.sanger.ac.uk/pub/cancer/dockstore/human/))
+1. VAGrENT (annotation) reference archive (e.g. [VAGrENT_ref_GRCh37d5_ensembl_75.tar.gz](ftp://ftp.sanger.ac.uk/pub/cancer/dockstore/human/))
 
 Inputs 1&2 are expected to have been mapped using [dockstore-cgpmap](https://dockstore.org/containers/quay.io/wtsicgp/dockstore-cgpmap).
 
@@ -22,22 +22,22 @@ All the SNV variants do not pass filtering (several only fail as not in a gene f
 
 Please check the Wiki then raise an issue if you require additional information on how to generate your own reference files.  Much of this information is available on the individual algorithm pages.
 
-Release process
-===============
+## Release process
+
 This project is maintained using HubFlow.
 
 1. Make appropriate changes
-2. Bump version in `Dockerfile` and `Dockstore.cwl`
-3. Push changes
-4. Check state on Travis
-5. Generate the release (add notes to GitHub)
-6. Confirm that image has been built on [quay.io](https://quay.io/repository/wtsicgp/dockstore-cgpwxs?tab=builds)
-7. Update the [dockstore](https://dockstore.org/containers/quay.io/wtsicgp/dockstore-cgpwxs) entry, see [their docs](https://dockstore.org/docs/getting-started-with-dockstore).
+1. Bump version in `Dockerfile` and `Dockstore.cwl`
+1. Push changes
+1. Check state on Travis
+1. Generate the release (add notes to GitHub)
+1. Confirm that image has been built on [quay.io](https://quay.io/repository/wtsicgp/dockstore-cgpwxs?tab=builds)
+1. Update the [dockstore](https://dockstore.org/containers/quay.io/wtsicgp/dockstore-cgpwxs) entry, see [their docs](https://dockstore.org/docs/getting-started-with-dockstore).
 
-LICENCE
-=======
+## LICENCE
 
-Copyright (c) 2016-2017 Genome Research Ltd.
+```
+Copyright (c) 2016-2018 Genome Research Ltd.
 
 Author: Cancer Genome Project <cgpit@sanger.ac.uk>
 
@@ -65,3 +65,4 @@ reads ‘Copyright (c) 2005, 2007, 2008, 2009, 2011, 2012’ and a copyright
 statement that reads ‘Copyright (c) 2005-2012’ should be interpreted as being
 identical to a statement that reads ‘Copyright (c) 2005, 2006, 2007, 2008,
 2009, 2010, 2011, 2012’."
+```
