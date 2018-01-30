@@ -9,8 +9,8 @@ fi
 set -u
 
 # cgpVcf
-VER_CGPVCF="v2.2.0"
-VER_VCFTOOLS="0.1.14"
+VER_CGPVCF="v2.2.1"
+VER_VCFTOOLS="0.1.15"
 
 # cgpPindel
 VER_CGPPINDEL="feature/readsVsFragments"
@@ -74,10 +74,9 @@ set -u
 if [ ! -e $SETUP_DIR/vcftools.success ]; then
   curl -sSL --retry 10 https://github.com/vcftools/vcftools/releases/download/v${VER_VCFTOOLS}/vcftools-${VER_VCFTOOLS}.tar.gz > distro.tar.gz
   rm -rf distro/*
-  tar --strip-components 1 -C distro -xzf distro.tar.gz
+  tar --strip-components 2 -C distro -xzf distro.tar.gz
   cd distro
-  curl -sSL https://raw.githubusercontent.com/cancerit/cgpVcf/${VER_CGPVCF}/patches/vcfToolsProcessLog.diff | patch src/perl/Vcf.pm
-  ./configure --prefix=$INST_PATH --with-pmdir=$INST_PATH/lib/perl5
+  ./configure --prefix=$INST_PATH --with-pmdir=lib/perl5
   make -j$CPU
   make install
   cd $SETUP_DIR
