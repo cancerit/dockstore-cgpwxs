@@ -120,4 +120,4 @@ outputs:
     outputBinding:
       glob:  WXS_*_vs_*.timings.tar.gz
 
-baseCommand: ["/opt/wtsi-cgp/bin/ds-wrapper.pl"]
+baseCommand: ["/opt/wtsi-cgp/bin/ds-cgpwxs.pl"]

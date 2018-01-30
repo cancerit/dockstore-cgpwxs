@@ -6,8 +6,8 @@ ADD build/opt-build.sh build/
 RUN bash build/opt-build.sh $OPT
 
 ADD scripts/analysisWXS.sh $OPT/bin/analysisWXS.sh
-ADD scripts/ds-wrapper.pl $OPT/bin/ds-wrapper.pl
-RUN chmod a+x $OPT/bin/analysisWXS.sh $OPT/bin/ds-wrapper.pl
+ADD scripts/ds-cgpwxs.pl $OPT/bin/ds-cgpwxs.pl
+RUN chmod a+x $OPT/bin/analysisWXS.sh $OPT/bin/ds-cgpwxs.pl
 
 
 FROM  quay.io/wtsicgp/dockstore-cgpmap:3.0.0-rc1
