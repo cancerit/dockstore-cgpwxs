@@ -30,7 +30,7 @@ Please check the Wiki then raise an issue if you require additional information 
 When running outside of a docker container you can set the number of CPUs via:
 
 * `export CPU=N`
-* `-threads|-t` option of `ds-cgpmap.pl`
+* `-cores|-c` option of `ds-cgpmap.pl`
 
 If not set detects available cores on system.
 
