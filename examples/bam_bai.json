@@ -15,8 +15,16 @@
     "path": "ftp://ngs.sanger.ac.uk/production/cancer/dockstore/cgpwxs/COLO-829_ex.bam",
     "class": "File"
   },
+  "tumourIdx": {
+    "path": "ftp://ngs.sanger.ac.uk/production/cancer/dockstore/cgpwxs/COLO-829_ex.bam.bai",
+    "class": "File"
+  },
   "normal": {
     "path": "ftp://ngs.sanger.ac.uk/production/cancer/dockstore/cgpwxs/COLO-829-BL_ex.bam",
+    "class": "File"
+  },
+  "normalIdx": {
+    "path": "ftp://ngs.sanger.ac.uk/production/cancer/dockstore/cgpwxs/COLO-829-BL_ex.bam.bai",
     "class": "File"
   },
   "exclude": "NC_007605,hs37d5,GL%",

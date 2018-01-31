@@ -108,13 +108,32 @@ NAME_WT=`samtools view -H $BAM_WT | perl -ne 'if($_ =~ m/^\@RG/) {($sm) = $_ =~m
 echo -e "\tNAME_MT : $NAME_MT"
 echo -e "\tNAME_WT : $NAME_WT"
 
-BAM_MT_TMP=$TMP/$NAME_MT.bam
-BAM_WT_TMP=$TMP/$NAME_WT.bam
+# capture index extension type (assuming same from both)
+ALN_EXTN='bam'
+BAS_EXTN='bam.bas'
+IDX_EXTN=''
+if [[ $IDX_MT == *.bam.bai ]] then;
+  IDX_EXTN='bam.bai'
+else if [[ $IDX_MT == *.bam.csi ]] then;
+  IDX_EXTN='bam.csi'
+else if [[ $IDX_MT == *.cram.crai ]] then;
+  IDX_EXTN='cram.crai'
+  ALN_EXTN='cram'
+  BAS_EXTN='cram.bas'
+else
+  echo "Alignment is not BAM or CRAM file: $" >&2
+  exit 1
+fi
+
+BAM_MT_TMP=$TMP/$NAME_MT.$ALN_EXTN
+IDX_MT_TMP=$TMP/$NAME_MT.$IDX_EXTN
+BAM_WT_TMP=$TMP/$NAME_WT.$ALN_EXTN
+IDX_WT_TMP=$TMP/$NAME_WT.$IDX_EXTN
 
 ln -fs $BAM_MT $BAM_MT_TMP
+ln -fs $IDX_MT $IDX_MT_TMP
 ln -fs $BAM_WT $BAM_WT_TMP
-ln -fs $BAM_MT.bai $BAM_MT_TMP.bai
-ln -fs $BAM_WT.bai $BAM_WT_TMP.bai
+ln -fs $IDX_WT $IDX_WT_TMP
 
 echo "Setting up Parallel block 1"
 
@@ -129,7 +148,7 @@ if [ ! -f "${BAM_WT}.bas" ]; then
   echo -e "\t[Parallel block 1] BAS $NAME_WT added..."
   do_parallel[bas_WT]="bam_stats -i $BAM_WT_TMP -o $BAM_WT_TMP.bas"
 else
-  ln -fs $BAM_WT.bas $BAM_WT_TMP.bas
+  ln -fs $BAM_WT.$BAS_EXTN $BAM_WT_TMP.$BAS_EXTN
 fi
 
 echo "Starting Parallel block 1: `date`"

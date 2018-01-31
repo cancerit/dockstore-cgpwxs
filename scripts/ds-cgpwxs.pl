@@ -22,7 +22,9 @@ GetOptions( 'h|help' => \$opts{'h'},
             'a|annot=s' => \$opts{'a'},
             'si|snv_indel=s' => \$opts{'si'},
             't|tumour=s' => \$opts{'t'},
+            'tidx=s' => \$opts{'tidx'},
             'n|normal=s' => \$opts{'n'},
+            'nidx=s' => \$opts{'nidx'},
             'e|exclude=s' => \$opts{'e'},
             'sp|species=s' => \$opts{'sp'},
             'as|assembly=s' => \$opts{'as'},
@@ -105,7 +107,9 @@ printf $FH "PROTOCOL=WXS\n";
 printf $FH "OUTPUT_DIR='%s'\n", $ENV{HOME};
 printf $FH "REF_BASE='%s'\n", $ref_area;
 printf $FH "BAM_MT='%s'\n", $opts{'t'};
+printf $FH "IDX_MT='%s'\n", $opts{'tidx'};
 printf $FH "BAM_WT='%s'\n", $opts{'n'};
+printf $FH "IDX_WT='%s'\n", $opts{'nidx'};
 printf $FH "PINDEL_EXCLUDE='%s'\n", $opts{'e'};
 printf $FH "SPECIES='%s'\n", $opts{'sp'};
 printf $FH "ASSEMBLY='%s'\n", $opts{'as'};

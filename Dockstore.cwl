@@ -55,23 +55,37 @@ inputs:
   tumour:
     type: File
     secondaryFiles:
-    - .bai
     - .bas
-    doc: "Tumour BAM or CRAM file"
+    doc: "Tumour alignments file [bam|cram]"
     inputBinding:
       prefix: -tumour
       position: 4
       separate: true
 
+  tumourIdx:
+    type: File
+    doc: "Tumour alignment file index [bai|csi|crai]"
+    inputBinding:
+      prefix: -tidx
+      position: 5
+      separate: true
+
   normal:
     type: File
     secondaryFiles:
-    - .bai
     - .bas
-    doc: "Normal BAM or CRAM file"
+    doc: "Normal alignments file [bam|cram]"
     inputBinding:
       prefix: -normal
-      position: 5
+      position: 6
+      separate: true
+
+  normalIdx:
+    type: File
+    doc: "Normal alignment file index"
+    inputBinding:
+      prefix: -normal
+      position: 7
       separate: true
 
   exclude:
@@ -79,7 +93,7 @@ inputs:
     doc: "Contigs to block during indel analysis"
     inputBinding:
       prefix: -exclude
-      position: 6
+      position: 8
       separate: true
       shellQuote: true
 
@@ -89,7 +103,7 @@ inputs:
     default: ''
     inputBinding:
       prefix: -species
-      position: 7
+      position: 9
       separate: true
       shellQuote: true
 
@@ -99,7 +113,7 @@ inputs:
     default: ''
     inputBinding:
       prefix: -assembly
-      position: 8
+      position: 10
       separate: true
       shellQuote: true
 
