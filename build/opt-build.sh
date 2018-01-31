@@ -13,16 +13,16 @@ VER_CGPVCF="v2.2.1"
 VER_VCFTOOLS="0.1.15"
 
 # cgpPindel
-VER_CGPPINDEL="feature/readsVsFragments"
+VER_CGPPINDEL="v3.0.0-rc1"
 
 # cgpCaVEManPostProcessing
-VER_CGPCAVEPOSTPROC="1.6.9"
+VER_CGPCAVEPOSTPROC="1.8.0-rc1"
 # if issues found downgrade to 2.23.0 but can't find any use of bedtools coverage
 VER_BEDTOOLS="2.27.1"
 
 # cgpCaVEManWrapper
-VER_CGPCAVEWRAP="1.12.0"
-VER_CAVEMAN="1.12.0"
+VER_CGPCAVEWRAP="1.13.0-rc1"
+VER_CAVEMAN="1.13.0-rc1"
 
 # VAGrENT
 VER_VAGRENT="v3.2.3"

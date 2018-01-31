@@ -8,7 +8,7 @@
     "class": "File"
   },
   "snv_indel": {
-    "path": "ftp://ftp.sanger.ac.uk/pub/cancer/dockstore/human/SNV_INDEL_ref_GRCh37d5.tar.gz",
+    "path": "ftp://ftp.sanger.ac.uk/pub/cancer/dockstore/human/SNV_INDEL_ref_GRCh37d5-fragment.tar.gz",
     "class": "File"
   },
   "tumour": {
