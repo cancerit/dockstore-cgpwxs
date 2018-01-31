@@ -27,6 +27,7 @@ GetOptions( 'h|help' => \$opts{'h'},
             'sp|species=s' => \$opts{'sp'},
             'as|assembly=s' => \$opts{'as'},
             'sf|snvflag=s' => \$opts{'sf'},
+            't|threads:i' => \$opts{'t'},
 ) or pod2usage(2);
 
 pod2usage(-verbose => 1, -exitval => 0) if(defined $opts{'h'});
@@ -109,6 +110,7 @@ printf $FH "PINDEL_EXCLUDE='%s'\n", $opts{'e'};
 printf $FH "SPECIES='%s'\n", $opts{'sp'};
 printf $FH "ASSEMBLY='%s'\n", $opts{'as'};
 printf $FH "SNVFLAG='%s'\n", $ini;
+printf $FH "CPU=%d\n", $opts{'t'} if(defined $opts{'t'});
 close $FH;
 
 exec('analysisWXS.sh'); # I will never return to the perl code

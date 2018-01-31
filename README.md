@@ -9,8 +9,11 @@
 
 Required input files are
 
-1. Tumour BAM file
-1. Normal BAM file
+Note: cram and csi/crai will not work via Dockstore/CWL yet but direct exec of `scripts/ds-cgpwxs.pl`
+will allow use of these.
+
+1. Tumour BAM/CRAM file (plus bai/csi/crai + bas)
+1. Normal BAM/CRAM file (plus bai/csi/crai + bas)
 1. Core reference archive (e.g. [core_ref_GRCh37d5.tar.gz](ftp://ftp.sanger.ac.uk/pub/cancer/dockstore/human/))
 1. WXS reference archive (e.g. [SNV_INDEL_ref_GRCh37d5.tar.gz](ftp://ftp.sanger.ac.uk/pub/cancer/dockstore/human/))
 1. VAGrENT (annotation) reference archive (e.g. [VAGrENT_ref_GRCh37d5_ensembl_75.tar.gz](ftp://ftp.sanger.ac.uk/pub/cancer/dockstore/human/))
@@ -21,6 +24,15 @@ The data linked in the 'examples' area is a tiny section of chr21 from the cell 
 All the SNV variants do not pass filtering (several only fail as not in a gene footprint, 'F009').
 
 Please check the Wiki then raise an issue if you require additional information on how to generate your own reference files.  Much of this information is available on the individual algorithm pages.
+
+## Usable Cores
+
+When running outside of a docker container you can set the number of CPUs via:
+
+* `export CPU=N`
+* `-threads|-t` option of `ds-cgpmap.pl`
+
+If not set detects available cores on system.
 
 ## Release process
 
