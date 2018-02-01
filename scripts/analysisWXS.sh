@@ -112,11 +112,11 @@ echo -e "\tNAME_WT : $NAME_WT"
 ALN_EXTN='bam'
 BAS_EXTN='bam.bas'
 IDX_EXTN=''
-if [[ $IDX_MT == *.bam.bai ]] then;
+if [[ "$IDX_MT" == *.bam.bai ]]; then
   IDX_EXTN='bam.bai'
-else if [[ $IDX_MT == *.bam.csi ]] then;
+elif [[ "$IDX_MT" == *.bam.csi ]]; then
   IDX_EXTN='bam.csi'
-else if [[ $IDX_MT == *.cram.crai ]] then;
+elif [[ "$IDX_MT" == *.cram.crai ]]; then
   IDX_EXTN='cram.crai'
   ALN_EXTN='cram'
   BAS_EXTN='cram.bas'
@@ -141,7 +141,7 @@ if [ ! -f "${BAM_MT}.bas" ]; then
   echo -e "\t[Parallel block 1] BAS $NAME_MT added..."
   do_parallel[bas_MT]="bam_stats -i $BAM_MT_TMP -o $BAM_MT_TMP.bas"
 else
-  ln -fs $BAM_MT.bas $BAM_MT_TMP.bas
+  ln -fs $BAM_MT.$BAS_EXTN $BAM_MT_TMP.$BAS_EXTN
 fi
 
 if [ ! -f "${BAM_WT}.bas" ]; then

@@ -84,7 +84,7 @@ inputs:
     type: File
     doc: "Normal alignment file index"
     inputBinding:
-      prefix: -normal
+      prefix: -nidx
       position: 7
       separate: true
 
