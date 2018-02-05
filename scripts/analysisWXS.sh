@@ -52,9 +52,12 @@ echo -e "\nStart workflow: `date`\n"
 declare -a PRE_EXEC
 declare -a POST_EXEC
 
-if [ -z ${PARAM_FILE+x} ] ; then
+if [[ $# -eq 1 ]] ; then
+  PARAM_FILE=$1
+elif [ -z ${PARAM_FILE+x} ] ; then
   PARAM_FILE=$HOME/run.params
 fi
+
 echo "Loading user options from: $PARAM_FILE"
 if [ ! -f $PARAM_FILE ]; then
   echo -e "\tERROR: file indicated by PARAM_FILE not found: $PARAM_FILE" 1>&2
@@ -110,7 +113,6 @@ echo -e "\tNAME_WT : $NAME_WT"
 
 # capture index extension type (assuming same from both)
 ALN_EXTN='bam'
-BAS_EXTN='bam.bas'
 IDX_EXTN=''
 if [[ "$IDX_MT" == *.bam.bai ]]; then
   IDX_EXTN='bam.bai'
@@ -119,7 +121,6 @@ elif [[ "$IDX_MT" == *.bam.csi ]]; then
 elif [[ "$IDX_MT" == *.cram.crai ]]; then
   IDX_EXTN='cram.crai'
   ALN_EXTN='cram'
-  BAS_EXTN='cram.bas'
 else
   echo "Alignment is not BAM or CRAM file: $" >&2
   exit 1
@@ -141,14 +142,14 @@ if [ ! -f "${BAM_MT}.bas" ]; then
   echo -e "\t[Parallel block 1] BAS $NAME_MT added..."
   do_parallel[bas_MT]="bam_stats -i $BAM_MT_TMP -o $BAM_MT_TMP.bas"
 else
-  ln -fs $BAM_MT.$BAS_EXTN $BAM_MT_TMP.$BAS_EXTN
+  ln -fs $BAM_MT.$BAS_EXTN $BAM_MT_TMP.'.bas'
 fi
 
 if [ ! -f "${BAM_WT}.bas" ]; then
   echo -e "\t[Parallel block 1] BAS $NAME_WT added..."
   do_parallel[bas_WT]="bam_stats -i $BAM_WT_TMP -o $BAM_WT_TMP.bas"
 else
-  ln -fs $BAM_WT.$BAS_EXTN $BAM_WT_TMP.$BAS_EXTN
+  ln -fs $BAM_WT.$BAS_EXTN $BAM_WT_TMP.'.bas'
 fi
 
 echo "Starting Parallel block 1: `date`"
@@ -232,6 +233,11 @@ run_parallel $CPU do_parallel
 
 # clean up log files
 rm -rf $OUTPUT_DIR/${NAME_MT}_vs_${NAME_WT}/*/logs
+
+# cleanup reference area, see ds-cgpwxs.pl
+if [ ! -z ${CLEAN_REF+x} ]; then
+  rm -rf $REF_BASE
+fi
 
 echo 'Package results'
 # timings first
