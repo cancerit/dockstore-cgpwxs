@@ -5,6 +5,7 @@
 * See dockstore-cgpmap v3.0.0 (primarily adds mismatchQc)
 * CaVEMan and cgpPindel updated to use freagment based counting.
 * Using build stages to shrink images.
+* remove legacy PRE/POST-EXEC from cgpbox days
 
 ## 2.1.0
 

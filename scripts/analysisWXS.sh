@@ -80,29 +80,8 @@ fi
 echo -e "\tBAM_MT : $BAM_MT"
 echo -e "\tBAM_WT : $BAM_WT"
 
-if [ ${#PRE_EXEC[@]} -eq 0 ]; then
-  PRE_EXEC='echo No PRE_EXEC defined'
-fi
-
-if [ ${#POST_EXEC[@]} -eq 0 ]; then
-  POST_EXEC='echo No POST_EXEC defined'
-fi
-
 set -u
 mkdir -p $OUTPUT_DIR
-
-# run any pre-exec step before attempting to access BAMs
-# logically the pre-exec could be pulling them
-if [ ! -f $OUTPUT_DIR/pre-exec.done ]; then
-  echo -e "\nRun PRE_EXEC: `date`"
-
-  for i in "${PRE_EXEC[@]}"; do
-    set -x
-    $i
-    { set +x; } 2> /dev/null
-  done
-  touch $OUTPUT_DIR/pre-exec.done
-fi
 
 ## get sample names from BAM headers
 NAME_MT=`samtools view -H $BAM_MT | perl -ne 'if($_ =~ m/^\@RG/) {($sm) = $_ =~m/\tSM:([^\t]+)/; print "$sm\n";}' | uniq`
@@ -244,13 +223,5 @@ echo 'Package results'
 tar -C $OUTPUT_DIR -zcf ${PROTOCOL}_${NAME_MT}_vs_${NAME_WT}.timings.tar.gz timings
 tar -C $OUTPUT_DIR -zcf ${PROTOCOL}_${NAME_MT}_vs_${NAME_WT}.result.tar.gz ${NAME_MT}_vs_${NAME_WT}
 cp $PARAM_FILE ${PROTOCOL}_${NAME_MT}_vs_${NAME_WT}.run.params
-
-# run any post-exec step
-echo -e "\nRun POST_EXEC: `date`"
-for i in "${POST_EXEC[@]}"; do
-  set -x
-  $i
-  set +x
-done
 
 echo -e "\nWorkflow end: `date`"
