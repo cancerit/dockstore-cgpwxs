@@ -9,17 +9,16 @@ label: "CGP WXS analysis flow"
 cwlVersion: v1.0
 
 doc: |
-    ![build_status](https://quay.io/repository/wtsicgp/dockstore-cgpwxs/status)
-    A Docker container for the CGP WXS analysis flow. See the [dockstore-cgpwxs](https://github.com/cancerit/dockstore-cgpwxs) website for more information.
+  ![build_status](https://quay.io/repository/wtsicgp/dockstore-cgpwxs/status)
+  A Docker container for the CGP WXS analysis flow. See the [dockstore-cgpwxs](https://github.com/cancerit/dockstore-cgpwxs) website for more information.
 
-dct:creator:
-  "@id": "http://orcid.org/0000-0002-5634-1539"
-  foaf:name: Keiran M Raine
-  foaf:mbox: "keiranmraine@gmail.com"
+  Parameters for a CWL definition are generally described in a json file, but parameters can be provided on the command line.
+
+  To see the parameters descriptions please run: cwltool --tool-help path_to.cwl
 
 requirements:
   - class: DockerRequirement
-    dockerPull: "quay.io/wtsicgp/dockstore-cgpwxs:3.0.0-rc1"
+    dockerPull: "quay.io/wtsicgp/dockstore-cgpwxs:3.0.0-rc2"
 
 hints:
   - class: ResourceRequirement
@@ -135,3 +134,23 @@ outputs:
       glob:  WXS_*_vs_*.timings.tar.gz
 
 baseCommand: ["/opt/wtsi-cgp/bin/ds-cgpwxs.pl"]
+
+$schemas:
+  - http://schema.org/docs/schema_org_rdfa.html
+
+$namespaces:
+  s: http://schema.org/
+
+s:codeRepository: https://github.com/cancerit/dockstore-cgpwxs
+s:license: https://spdx.org/licenses/AGPL-3.0-only
+
+s:author:
+  - class: s:Person
+    s:identifier: https://orcid.org/0000-0002-5634-1539
+    s:email: mailto:keiranmraine@gmail.com
+    s:name: Keiran Raine
+
+dct:creator:
+  "@id": "keiranmraine@gmail.com"
+  foaf:name: Keiran Raine
+  foaf:mbox: "keiranmraine@gmail.com"
