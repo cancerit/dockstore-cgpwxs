@@ -121,14 +121,14 @@ if [ ! -f "${BAM_MT}.bas" ]; then
   echo -e "\t[Parallel block 1] BAS $NAME_MT added..."
   do_parallel[bas_MT]="bam_stats -i $BAM_MT_TMP -o $BAM_MT_TMP.bas"
 else
-  ln -fs $BAM_MT.$BAS_EXTN $BAM_MT_TMP.'.bas'
+  ln -fs $BAM_MT.bas $BAM_MT_TMP.bas
 fi
 
 if [ ! -f "${BAM_WT}.bas" ]; then
   echo -e "\t[Parallel block 1] BAS $NAME_WT added..."
   do_parallel[bas_WT]="bam_stats -i $BAM_WT_TMP -o $BAM_WT_TMP.bas"
 else
-  ln -fs $BAM_WT.$BAS_EXTN $BAM_WT_TMP.'.bas'
+  ln -fs $BAM_WT.bas $BAM_WT_TMP.bas
 fi
 
 echo "Starting Parallel block 1: `date`"
