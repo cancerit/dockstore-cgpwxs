@@ -153,7 +153,7 @@ do_parallel[cgpPindel]="pindel.pl \
  -st $PROTOCOL \
  -as $ASSEMBLY \
  -sp $SPECIES \
- -e $PINDEL_EXCLUDE \
+ -e $CONTIG_EXCLUDE \
  -b $REF_BASE/pindel/HiDepth.bed.gz \
  -c $CPU \
  -sf $REF_BASE/pindel/softRules.lst"
@@ -184,7 +184,8 @@ do_parallel[CaVEMan]="caveman.pl \
  -f $REF_BASE/caveman/flagging/flag.to.vcf.convert.ini \
  -o $OUTPUT_DIR/${NAME_MT}_vs_${NAME_WT}/caveman \
  -np $PROTOCOL \
- -tp $PROTOCOL"
+ -tp $PROTOCOL \
+ -x $CONTIG_EXCLUDE"
 
 echo "Starting Parallel block 2: `date`"
 run_parallel $CPU do_parallel

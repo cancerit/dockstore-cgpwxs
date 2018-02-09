@@ -82,7 +82,7 @@ printf $FH "BAM_MT='%s'\n", $opts{'t'};
 printf $FH "IDX_MT='%s'\n", $opts{'tidx'};
 printf $FH "BAM_WT='%s'\n", $opts{'n'};
 printf $FH "IDX_WT='%s'\n", $opts{'nidx'};
-printf $FH "PINDEL_EXCLUDE='%s'\n", $opts{'e'};
+printf $FH "CONTIG_EXCLUDE='%s'\n", $opts{'e'};
 printf $FH "SPECIES='%s'\n", $opts{'sp'};
 printf $FH "ASSEMBLY='%s'\n", $opts{'as'};
 printf $FH "SNVFLAG='%s'\n", $ini;
@@ -203,7 +203,7 @@ dh-wrapper.pl [options] [file(s)...]
     -tidx             Tumour index file
     -normal      -n   Normal [CR|B]AM file
     -nidx             Normal index file
-    -exclude     -e   Exclude these contigs from pindel analysis
+    -exclude     -e   Exclude these contigs from analysis
                         e.g. NC_007605,hs37d5,GL%
 
   Optional parameters
@@ -254,7 +254,7 @@ Path to normal alignment file index (bai|csi|crai), still needs to be colocated.
 
 =item B<-exclude>
 
-Contigs to be excluded from Pindel analysis, csv, use '%' for wildcard.
+Contigs to be excluded from analysis, csv, use '%' for wildcard.
 
 =item B<-species>
 
