@@ -16,6 +16,9 @@ doc: |
 
   To see the parameters descriptions please run: cwltool --tool-help path_to.cwl
 
+  WARNING: The usual setting for 'exclude' is 'NC_007605,hs37d5,GL%' (human GRCh37/NCBI37). Examples
+  are configured to run as quickly as possible.
+
 requirements:
   - class: DockerRequirement
     dockerPull: "quay.io/wtsicgp/dockstore-cgpwxs:3.0.0-rc2"
