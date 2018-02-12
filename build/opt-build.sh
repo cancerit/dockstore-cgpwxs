@@ -13,15 +13,15 @@ VER_CGPVCF="v2.2.1"
 VER_VCFTOOLS="0.1.15"
 
 # cgpPindel
-VER_CGPPINDEL="v3.0.0-rc1"
+VER_CGPPINDEL="feature/readsVsFragments"
 
 # cgpCaVEManPostProcessing
-VER_CGPCAVEPOSTPROC="1.8.0-rc1"
+VER_CGPCAVEPOSTPROC="feature/overlapping_reads"
 # if issues found downgrade to 2.23.0 but can't find any use of bedtools coverage
 VER_BEDTOOLS="2.27.1"
 
 # cgpCaVEManWrapper
-VER_CGPCAVEWRAP="1.13.0-rc1"
+VER_CGPCAVEWRAP="feature/overlapping_reads"
 VER_CAVEMAN="1.13.0-rc1"
 
 # VAGrENT
