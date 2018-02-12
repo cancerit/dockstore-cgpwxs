@@ -131,6 +131,12 @@ else
   ln -fs $BAM_WT.bas $BAM_WT_TMP.bas
 fi
 
+## prime the cache
+USER_CACHE=$OUTPUT_DIR/ref_cache
+export REF_CACHE=$USER_CACHE/%2s/%2s/%s
+export REF_PATH=$REF_CACHE:http://www.ebi.ac.uk/ena/cram/md5/%s
+do_parallel[cache_POP]="seq_cache_populate.pl -root $USER_CACHE $REF_BASE/genome.fa"
+
 echo "Starting Parallel block 1: `date`"
 run_parallel $CPU do_parallel
 
@@ -218,6 +224,9 @@ rm -rf $OUTPUT_DIR/${NAME_MT}_vs_${NAME_WT}/*/logs
 if [ ! -z ${CLEAN_REF+x} ]; then
   rm -rf $REF_BASE
 fi
+
+# cleanup ref cache
+rm -rf $USER_CACHE
 
 echo 'Package results'
 # timings first
