@@ -3,7 +3,9 @@
 ## NEXT
 
 * See dockstore-cgpmap v3.0.0 (primarily adds mismatchQc)
-* CaVEMan and cgpPindel updated to use freagment based counting.
+* CaVEMan and cgpPindel updated to use fragment based counting.
+  * You will need to update the reference pack to include the new flagging rules, see example `json`
+  files
 * Using build stages to shrink images.
 * remove legacy PRE/POST-EXEC from cgpbox days
 

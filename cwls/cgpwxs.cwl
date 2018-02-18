@@ -12,6 +12,9 @@ doc: |
   ![build_status](https://quay.io/repository/wtsicgp/dockstore-cgpwxs/status)
   A Docker container for the CGP WXS analysis flow. See the [dockstore-cgpwxs](https://github.com/cancerit/dockstore-cgpwxs) website for more information.
 
+  Please read the relevant [changes](https://github.com/cancerit/dockstore-cgpwxs/blob/master/CHANGES.md)
+  when upgrading.
+
   Parameters for a CWL definition are generally described in a json file, but parameters can be provided on the command line.
 
   To see the parameters descriptions please run: cwltool --tool-help path_to.cwl

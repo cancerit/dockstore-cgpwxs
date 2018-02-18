@@ -1,11 +1,16 @@
 # dockstore-cgpwxs
 
-`dockstore-cgpwxs` provides a complete multi threaded WXS analysis for SNV and INDEL variants with associated annotation of VCF files.  This has been packaged specifically for use with the [Dockstore.org](https://dockstore.org/) framework.
+`dockstore-cgpwxs` provides a complete multi threaded WXS analysis for SNV and INDEL variants with
+associated annotation of VCF files.  This has been packaged specifically for use with the
+[Dockstore.org](https://dockstore.org/) framework.
 
-[![Docker Repository on Quay](https://quay.io/repository/wtsicgp/dockstore-cgpwxs/status "Docker Repository on Quay")](https://quay.io/repository/wtsicgp/dockstore-cgpwxs)
+[![Gitter Badge][gitter-svg]][gitter-badge]
 
-[![Build Status](https://travis-ci.org/cancerit/dockstore-cgpwxs.svg?branch=master)](https://travis-ci.org/cancerit/dockstore-cgpwxs) : master  
-[![Build Status](https://travis-ci.org/cancerit/dockstore-cgpwxs.svg?branch=develop)](https://travis-ci.org/cancerit/dockstore-cgpwxs) : develop
+[![Quay Badge][quay-status]][quay-repo]
+
+| Master                                        | Develop                                         |
+| --------------------------------------------- | ----------------------------------------------- |
+| [![Master Badge][travis-master]][travis-base] | [![Develop Badge][travis-develop]][travis-base] |
 
 Required input files are
 
@@ -14,23 +19,29 @@ will allow use of these.
 
 1. Tumour BAM/CRAM file (plus bai/csi/crai + bas)
 1. Normal BAM/CRAM file (plus bai/csi/crai + bas)
-1. Core reference archive (e.g. [core_ref_GRCh37d5.tar.gz](ftp://ftp.sanger.ac.uk/pub/cancer/dockstore/human/))
-1. WXS reference archive (e.g. [SNV_INDEL_ref_GRCh37d5.tar.gz](ftp://ftp.sanger.ac.uk/pub/cancer/dockstore/human/))
-1. VAGrENT (annotation) reference archive (e.g. [VAGrENT_ref_GRCh37d5_ensembl_75.tar.gz](ftp://ftp.sanger.ac.uk/pub/cancer/dockstore/human/))
+1. Core reference archive (e.g. [core_ref_GRCh37d5.tar.gz][ftp-ref])
+1. WXS reference archive (e.g. [SNV_INDEL_ref_GRCh37d5.tar.gz][ftp-ref])
+1. VAGrENT (annotation) reference archive (e.g. [VAGrENT_ref_GRCh37d5_ensembl_75.tar.gz][ftp-ref])
 
-Inputs 1&2 are expected to have been mapped using [dockstore-cgpmap](https://dockstore.org/containers/quay.io/wtsicgp/dockstore-cgpmap).
+Inputs 1&2 are expected to have been mapped using [dockstore-cgpmap][dockstore-cgpmap]
 
-The data linked in the 'examples' area is a tiny section of chr21 from the cell line COLO-829.  This will generate a small number of INDEL and SNV variants.
-All the SNV variants do not pass filtering (several only fail as not in a gene footprint, 'F009').
+The data linked in the 'examples' area is a tiny section of chr21 from the cell line COLO-829.  This
+will generate a small number of INDEL and SNV variants. All the SNV variants do not pass filtering
+(several only fail as not in a gene footprint, 'F009').
 
-Please check the Wiki then raise an issue if you require additional information on how to generate your own reference files.  Much of this information is available on the individual algorithm pages.
+Please check the Wiki then raise an issue if you require additional information on how to generate
+your own reference files.  Much of this information is available on the individual algorithm pages.
+
+* [cgpCaVEManWrapper][caveman-wiki]
+* [cgpPindel][cgppindel-wiki]
+* [VAGrENT][vagrent-wiki]
 
 ## Usable Cores
 
 When running outside of a docker container you can set the number of CPUs via:
 
 * `export CPU=N`
-* `-cores|-c` option of `ds-cgpmap.pl`
+* `-cores|-c` option of `ds-cgpwxs.pl`
 
 If not set detects available cores on system.
 
@@ -43,8 +54,8 @@ This project is maintained using HubFlow.
 1. Push changes
 1. Check state on Travis
 1. Generate the release (add notes to GitHub)
-1. Confirm that image has been built on [quay.io](https://quay.io/repository/wtsicgp/dockstore-cgpwxs?tab=builds)
-1. Update the [dockstore](https://dockstore.org/containers/quay.io/wtsicgp/dockstore-cgpwxs) entry, see [their docs](https://dockstore.org/docs/getting-started-with-dockstore).
+1. Confirm that image has been built on [quay.io][quay-builds]
+1. Update the [dockstore][dockstore-cgpwgs] entry, see [their docs][dockstore-get-started].
 
 ## LICENCE
 
@@ -78,3 +89,28 @@ statement that reads ‘Copyright (c) 2005-2012’ should be interpreted as bein
 identical to a statement that reads ‘Copyright (c) 2005, 2006, 2007, 2008,
 2009, 2010, 2011, 2012’."
 ```
+
+<!-- links -->
+[ftp-ref]: ftp://ftp.sanger.ac.uk/pub/cancer/dockstore/human
+[cgppindel-wiki]: https://github.com/cancerit/cgpPindel/wiki
+[caveman-wiki]: https://github.com/cancerit/cgpCaVEManWrapper/wiki
+[vagrent-wiki]: https://github.com/cancerit/VAGrENT/wiki
+
+<!-- Travis -->
+[travis-base]: https://travis-ci.org/cancerit/dockstore-cgpwxs
+[travis-master]: https://travis-ci.org/cancerit/dockstore-cgpwxs.svg?branch=master
+[travis-develop]: https://travis-ci.org/cancerit/dockstore-cgpwxs.svg?branch=develop
+
+<!-- Gitter -->
+[gitter-svg]: https://badges.gitter.im/dockstore-cgp/Lobby.svg
+[gitter-badge]: https://gitter.im/dockstore-cgp/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
+
+<!-- Quay.io -->
+[quay-status]: https://quay.io/repository/wtsicgp/dockstore-cgpwxs/status
+[quay-repo]: https://quay.io/repository/wtsicgp/dockstore-cgpwxs
+[quay-builds]: https://quay.io/repository/wtsicgp/dockstore-cgpwxs?tab=builds
+
+<!-- dockstore -->
+[dockstore-cgpwxs]: https://dockstore.org/containers/quay.io/wtsicgp/dockstore-cgpwxs
+[dockstore-cgpmap]: https://dockstore.org/containers/quay.io/wtsicgp/dockstore-cgpmap
+[dockstore-get-started]: https://dockstore.org/docs/getting-started-with-dockstore
