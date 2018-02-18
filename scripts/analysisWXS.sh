@@ -225,7 +225,9 @@ if [ ! -z ${CLEAN_REF+x} ]; then
 fi
 
 # cleanup ref cache
-rm -rf $USER_CACHE
+if [ "$ALN_EXTN" == "cram" ]; then
+  rm -rf $USER_CACHE
+fi
 
 echo 'Package results'
 # timings first
