@@ -8,7 +8,27 @@ services:
   - docker
 
 install:
- - docker build -t dockstore-cgpwxs .
+ - virtualenv -p python3 venv
+ - source venv/bin/activate
+ - pip install html5lib cwltool
 
 script:
+ - set -e
+ - cwltool --verify cwls/cgpwxs.cwl
+ - docker build -t dockstore-cgpwxs .
  - docker images | grep -c dockstore-cgpwxs
+ - docker run -ti --rm dockstore-cgpwxs ds-cgpmap.pl -h
+ - docker run -ti --rm dockstore-cgpwxs bwa_mem.pl -version
+ - docker run -ti --rm dockstore-cgpwxs bammarkduplicates2 --version
+ - docker run -ti --rm dockstore-cgpmap samtools --version
+ - docker run -ti --rm dockstore-cgpwxs bash -c 'bwa 2>&1 | grep Version'
+ - docker run -ti --rm dockstore-cgpwxs ds-cgpwxs.pl -h
+ - docker run -ti --rm dockstore-cgpwxs cgpVCFSplit.pl -version
+ - docker run -ti --rm dockstore-cgpwxs vcftools --version
+ - docker run -ti --rm dockstore-cgpwxs bedtools --version
+ - docker run -ti --rm dockstore-cgpwxs bash -c 'pindel 2>&1 | grep Welcome'
+ - docker run -ti --rm dockstore-cgpwxs pindel.pl -version
+ - docker run -ti --rm dockstore-cgpwxs caveman --version
+ - docker run -ti --rm dockstore-cgpwxs caveman.pl -version
+ - docker run -ti --rm dockstore-cgpwxs cgpFlagCaVEMan.pl -version
+ - docker run -ti --rm dockstore-cgpwxs AnnotateVcf.pl -version
