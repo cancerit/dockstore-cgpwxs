@@ -1,1 +1,0 @@
-cwls/cgpwxs.cwl
