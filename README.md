@@ -12,6 +12,17 @@ associated annotation of VCF files.  This has been packaged specifically for use
 | --------------------------------------------- | ----------------------------------------------- |
 | [![Master Badge][travis-master]][travis-base] | [![Develop Badge][travis-develop]][travis-base] |
 
+<!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+
+- [Supported input formats](#supported-input-formats)
+- [Usable Cores](#usable-cores)
+- [Release process](#release-process)
+- [LICENCE](#licence)
+
+<!-- /TOC -->
+
+## Supported input formats
+
 Required input files are
 
 Note: cram and csi/crai will not work via Dockstore/CWL yet but direct exec of `scripts/ds-cgpwxs.pl`
