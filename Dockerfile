@@ -14,6 +14,15 @@ RUN apt-get install -yq --no-install-recommends\
 
 # python only for building bedtools, not needed to use
 
+### TO REMOVE once dockstore-cgpmap has fixed Bio::DB::HTS for CSI index
+#
+RUN apt-get install -yq --no-install-recommends\
+  libbz2-dev\
+  liblzma-dev\
+  libcurl4-gnutls-dev
+#
+###
+
 RUN locale-gen en_US.UTF-8
 RUN update-locale LANG=en_US.UTF-8
 
