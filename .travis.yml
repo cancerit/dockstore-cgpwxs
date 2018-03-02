@@ -20,21 +20,21 @@ script:
  - docker build -t dockstore-cgpwxs .
  - docker images | grep -c dockstore-cgpwxs
  - echo 'Verify program from each inherited package is found (dockstore-cgpbigwig)'
- - docker run -ti --rm dockstore-cgpwxs bwjoin --version
+ - docker run -t --rm dockstore-cgpwxs bwjoin --version
  - echo 'Verify program from each inherited package is found (dockstore-cgpmap)'
- - docker run -ti --rm dockstore-cgpwxs ds-cgpmap.pl -h
- - docker run -ti --rm dockstore-cgpwxs bwa_mem.pl -version
- - docker run -ti --rm dockstore-cgpwxs bammarkduplicates2 --version
- - docker run -ti --rm dockstore-cgpwxs samtools --version
- - docker run -ti --rm dockstore-cgpwxs bash -c 'bwa 2>&1 | grep Version'
+ - docker run -t --rm dockstore-cgpwxs ds-cgpmap.pl -h
+ - docker run -t --rm dockstore-cgpwxs bwa_mem.pl -version
+ - docker run -t --rm dockstore-cgpwxs bammarkduplicates2 --version
+ - docker run -t --rm dockstore-cgpwxs samtools --version
+ - docker run -t --rm dockstore-cgpwxs bash -c 'bwa 2>&1 | grep Version'
  - echo 'Verify a program from each new package is found (dockstore-cgpwxs)'
- - docker run -ti --rm dockstore-cgpwxs ds-cgpwxs.pl -h
- - docker run -ti --rm dockstore-cgpwxs cgpVCFSplit.pl -version
- - docker run -ti --rm dockstore-cgpwxs vcftools --version
- - docker run -ti --rm dockstore-cgpwxs bedtools --version
- - docker run -ti --rm dockstore-cgpwxs bash -c 'pindel 2>&1 | grep Welcome'
- - docker run -ti --rm dockstore-cgpwxs pindel.pl -version
- - docker run -ti --rm dockstore-cgpwxs caveman --version
- - docker run -ti --rm dockstore-cgpwxs caveman.pl -version
- - docker run -ti --rm dockstore-cgpwxs cgpFlagCaVEMan.pl -version
- - docker run -ti --rm dockstore-cgpwxs AnnotateVcf.pl -version
+ - docker run -t --rm dockstore-cgpwxs ds-cgpwxs.pl -h
+ - docker run -t --rm dockstore-cgpwxs cgpVCFSplit.pl -version
+ - docker run -t --rm dockstore-cgpwxs vcftools --version
+ - docker run -t --rm dockstore-cgpwxs bedtools --version
+ - docker run -t --rm dockstore-cgpwxs bash -c 'pindel 2>&1 | grep Welcome'
+ - docker run -t --rm dockstore-cgpwxs pindel.pl -version
+ - docker run -t --rm dockstore-cgpwxs caveman --version
+ - docker run -t --rm dockstore-cgpwxs caveman.pl -version
+ - docker run -t --rm dockstore-cgpwxs cgpFlagCaVEMan.pl -version
+ - docker run -t --rm dockstore-cgpwxs AnnotateVcf.pl -version
