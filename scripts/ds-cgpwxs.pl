@@ -88,7 +88,7 @@ printf $FH "SPECIES='%s'\n", $opts{'sp'};
 printf $FH "ASSEMBLY='%s'\n", $opts{'as'};
 printf $FH "SNVFLAG='%s'\n", $ini;
 printf $FH "CPU=%d\n", $opts{'c'} if(defined $opts{'c'});
-printf $FH "CLEAN_REF=1\n" if($ref_unpack);
+printf $FH "CLEAN_REF=%d\n", $ref_unpack;
 close $FH;
 
 exec('analysisWXS.sh', $run_file); # I will never return to the perl code

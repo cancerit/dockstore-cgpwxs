@@ -63,10 +63,6 @@ fi
 source $PARAM_FILE
 env
 
-TMP=$OUTPUT_DIR/tmp
-mkdir -p $TMP
-mkdir -p $OUTPUT_DIR/timings
-
 if [ -z ${CPU+x} ]; then
   CPU=`grep -c ^processor /proc/cpuinfo`
 fi
@@ -78,7 +74,10 @@ echo -e "\tBAM_MT : $BAM_MT"
 echo -e "\tBAM_WT : $BAM_WT"
 
 set -u
-mkdir -p $OUTPUT_DIR
+
+TMP=$OUTPUT_DIR/tmp
+mkdir -p $TMP
+mkdir -p $OUTPUT_DIR/timings
 
 ## get sample names from BAM headers
 NAME_MT=`samtools view -H $BAM_MT | perl -ne 'chomp; if($_ =~ m/^\@RG/) {($sm) = $_ =~m/\tSM:([^\t]+)/; print "$sm\n";}' | uniq`
@@ -220,7 +219,7 @@ run_parallel $CPU do_parallel
 rm -rf $OUTPUT_DIR/${NAME_MT}_vs_${NAME_WT}/*/logs
 
 # cleanup reference area, see ds-cgpwxs.pl
-if [ ! -z ${CLEAN_REF+x} ]; then
+if [ $CLEAN_REF -gt 0 ]; then
   rm -rf $REF_BASE
 fi
 
@@ -231,8 +230,8 @@ fi
 
 echo 'Package results'
 # timings first
-tar -C $OUTPUT_DIR -zcf ${PROTOCOL}_${NAME_MT}_vs_${NAME_WT}.timings.tar.gz timings
-tar -C $OUTPUT_DIR -zcf ${PROTOCOL}_${NAME_MT}_vs_${NAME_WT}.result.tar.gz ${NAME_MT}_vs_${NAME_WT}
-cp $PARAM_FILE ${PROTOCOL}_${NAME_MT}_vs_${NAME_WT}.run.params
+tar -C $OUTPUT_DIR -zcf $OUTPUT_DIR/${PROTOCOL}_${NAME_MT}_vs_${NAME_WT}.timings.tar.gz timings
+tar -C $OUTPUT_DIR -zcf $OUTPUT_DIR/${PROTOCOL}_${NAME_MT}_vs_${NAME_WT}.result.tar.gz ${NAME_MT}_vs_${NAME_WT}
+cp $PARAM_FILE $OUTPUT_DIR/${PROTOCOL}_${NAME_MT}_vs_${NAME_WT}.run.params
 
 echo -e "\nWorkflow end: `date`"

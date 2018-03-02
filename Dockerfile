@@ -1,4 +1,4 @@
-FROM  quay.io/wtsicgp/dockstore-cgpmap:3.0.0-rc8 as builder
+FROM  quay.io/wtsicgp/dockstore-cgpmap:3.0.0 as builder
 
 USER  root
 

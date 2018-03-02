@@ -14,14 +14,20 @@ install:
 
 script:
  - set -e
- - cwltool --verify cwls/cgpwxs.cwl
+ - echo 'Validate CWL file(s)'
+ - cwltool --validate cwls/cgpwxs.cwl
+ - echo 'Build and check docker image'
  - docker build -t dockstore-cgpwxs .
  - docker images | grep -c dockstore-cgpwxs
+ - echo 'Verify program from each inherited package is found (dockstore-cgpbigwig)'
+ - docker run -ti --rm dockstore-cgpmap bwjoin --version
+ - echo 'Verify program from each inherited package is found (dockstore-cgpmap)'
  - docker run -ti --rm dockstore-cgpwxs ds-cgpmap.pl -h
  - docker run -ti --rm dockstore-cgpwxs bwa_mem.pl -version
  - docker run -ti --rm dockstore-cgpwxs bammarkduplicates2 --version
  - docker run -ti --rm dockstore-cgpmap samtools --version
  - docker run -ti --rm dockstore-cgpwxs bash -c 'bwa 2>&1 | grep Version'
+ - echo 'Verify a program from each new package is found (dockstore-cgpwxs)'
  - docker run -ti --rm dockstore-cgpwxs ds-cgpwxs.pl -h
  - docker run -ti --rm dockstore-cgpwxs cgpVCFSplit.pl -version
  - docker run -ti --rm dockstore-cgpwxs vcftools --version
