@@ -1,4 +1,4 @@
-FROM  quay.io/wtsicgp/dockstore-cgpmap:3.0.0 as builder
+FROM  quay.io/wtsicgp/dockstore-cgpmap:3.0.1 as builder
 
 USER  root
 
@@ -13,15 +13,6 @@ RUN apt-get install -yq --no-install-recommends\
   python
 
 # python only for building bedtools, not needed to use
-
-### TO REMOVE once dockstore-cgpmap has fixed Bio::DB::HTS for CSI index
-#
-RUN apt-get install -yq --no-install-recommends\
-  libbz2-dev\
-  liblzma-dev\
-  libcurl4-gnutls-dev
-#
-###
 
 RUN locale-gen en_US.UTF-8
 RUN update-locale LANG=en_US.UTF-8
