@@ -7,7 +7,7 @@
   * You will need to update the reference pack to include the new flagging rules, see example `json`
   files
 * Using build stages to shrink images.
-* remove legacy PRE/POST-EXEC from cgpbox days
+* remove legacy PRE/POST-EXEC from cgpbox days, use dockstore if you want file provisioning.
 
 ## 2.1.0
 

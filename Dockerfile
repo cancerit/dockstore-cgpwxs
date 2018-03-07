@@ -29,9 +29,9 @@ RUN bash build/opt-build.sh $OPT
 
 FROM  ubuntu:16.04
 
-MAINTAINER  keiranmraine@gmail.com
+MAINTAINER  cgphelp@sanger.ac.uk
 
-LABEL vendor="Cancer Genome Project, Wellcome Trust Sanger Institute"
+LABEL vendor="CASM/Cancer IT, Wellcome Sanger Institute"
 LABEL uk.ac.sanger.cgp.description="CGP WXS pipeline for dockstore.org"
 LABEL uk.ac.sanger.cgp.version="3.0.0-rc1"
 

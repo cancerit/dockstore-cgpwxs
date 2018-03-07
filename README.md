@@ -16,6 +16,10 @@ associated annotation of VCF files.  This has been packaged specifically for use
 
 - [Supported input formats](#supported-input-formats)
 - [Usable Cores](#usable-cores)
+- [Other uses](#other-uses)
+	- [Native docker](#native-docker)
+	- [Singularity](#singularity)
+	- [Test data](#test-data)
 - [Release process](#release-process)
 - [LICENCE](#licence)
 
@@ -56,6 +60,66 @@ When running outside of a docker container you can set the number of CPUs via:
 
 If not set detects available cores on system.
 
+## Other uses
+
+xxx
+
+### Native docker
+
+All of the tools installed as part of [dockstore-cgpmap][dockstore-cgpmap] and the above packages
+are available for direct use.
+
+```
+export CGPWXS_VER=X.X.X
+docker pull quay.io/wtsicgp/dockstore-cgpwxs:$CGPWXS_VER
+docker --rm -ti [--volume ...] quay.io/wtsicgp/dockstore-cgpwxs:$CGPWXS_VER bash
+```
+
+### Singularity
+
+The resulting docker container has been tested with Singularity.  The command to exec is:
+
+```
+ds-cgpwxs.pl -h
+```
+
+Expected use would be along the lines of:
+
+```
+export CGPWXS_VER=X.X.X
+singularity pull docker://quay.io/wtsicgp/dockstore-cgpwxs:$CGPWXS_VER
+
+singularity exec\
+ --workdir /.../workspace  \
+ --home /.../workspace:/home  \
+ --bind /.../ref/human:/var/spool/ref:ro  \
+ --bind /.../example_data/cgpwxs:/var/spool/data:ro  \
+ dockstore-cgpwxs-${CGPWXS_VER}.simg  \
+  ds-cgpwxs.pl \
+   -reference /var/spool/ref/core_ref_GRCh37d5.tar.gz \
+   -annot /var/spool/ref/VAGrENT_ref_GRCh37d5_ensembl_75.tar.gz \
+   -snv_indel /var/spool/ref/SNV_INDEL_ref_GRCh37d5-fragment.tar.gz \
+   -tumour /var/spool/data/COLO-829_ex.cram \
+   -tidx /var/spool/data/COLO-829_ex.cram.crai \
+   -normal /var/spool/data/COLO-829-BL_ex.cram \
+   -nidx /var/spool/data/COLO-829-BL_ex.cram.crai \
+   -exclude NC_007605,hs37d5,GL%
+```
+
+For a system automatically attaching _all local mount points_ (not default singularity behaviour)
+you need not specify any `exec` params (workdir, home, bind) but you should specify the `-outdir`
+option for `ds-cgpwxs.pl` to prevent data being written to your home directory.
+
+By default results are written to the home directory of the container so ensure you bind
+a large volume and set the `-home` variable.  As indicated above the location can be overridden
+via the options of `ds-cgpwxs.pl`
+
+### Test data
+
+The `examples/` contains test data that can be used to verify the tool.
+
+You can find expected outputs on the Sanger Institute FTP site (based on BAM+BAI inputs): [dockstore-cgpwxs-expected.tar.gz][cgpwxs-exp]
+
 ## Release process
 
 This project is maintained using HubFlow.
@@ -73,7 +137,7 @@ This project is maintained using HubFlow.
 ```
 Copyright (c) 2016-2018 Genome Research Ltd.
 
-Author: Cancer Genome Project <cgpit@sanger.ac.uk>
+Author: CASM/Cancer IT <cgphelp@sanger.ac.uk>
 
 This file is part of dockstore-cgpwxs.
 
@@ -103,6 +167,7 @@ identical to a statement that reads ‘Copyright (c) 2005, 2006, 2007, 2008,
 
 <!-- links -->
 [ftp-ref]: ftp://ftp.sanger.ac.uk/pub/cancer/dockstore/human
+[ftp-exp]: ftp://ftp.sanger.ac.uk/pub/cancer/dockstore/expected
 [cgppindel-wiki]: https://github.com/cancerit/cgpPindel/wiki
 [caveman-wiki]: https://github.com/cancerit/cgpCaVEManWrapper/wiki
 [vagrent-wiki]: https://github.com/cancerit/VAGrENT/wiki
@@ -123,5 +188,5 @@ identical to a statement that reads ‘Copyright (c) 2005, 2006, 2007, 2008,
 
 <!-- dockstore -->
 [dockstore-cgpwxs]: https://dockstore.org/containers/quay.io/wtsicgp/dockstore-cgpwxs
-[dockstore-cgpmap]: https://dockstore.org/containers/quay.io/wtsicgp/dockstore-cgpmap
+[dockstore-cgpmap]: https://dockstore.org/containers/quay.io/wtsicgp/dockstore-cgpwxs
 [dockstore-get-started]: https://dockstore.org/docs/getting-started-with-dockstore

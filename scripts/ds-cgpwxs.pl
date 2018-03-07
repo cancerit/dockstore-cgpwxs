@@ -100,27 +100,27 @@ sub resolve_sp_as {
   my ($wt_species, $wt_assembly) = species_assembly_from_xam($options->{'n'});
   if($mt_species ne $wt_species) {
     warn "WARN: Species mismatch between T/N [CR|B]AM headers\n";
-    if(!defined $options->{'sp'}) {
+    if(!defined $options->{'sp'} || $options->{'sp'} eq q{}) {
       die "ERROR: Please define species to handle this mismatch\n";
     }
   }
   elsif($mt_species ne q{}) {
     $options->{'sp'} = $mt_species;
   }
-  if(!defined $options->{'sp'}) {
+  if(!defined $options->{'sp'} || $options->{'sp'} eq q{}) {
     die "ERROR: Please define species, not found in [CR|B]AM headers.\n";
   }
 
   if($mt_assembly ne $wt_assembly) {
     warn "WARN: Assembly mismatch between T/N [CR|B]AM headers\n";
-    if(!defined $options->{'as'}) {
+    if(!defined $options->{'as'} || $options->{'as'} eq q{}) {
       die "ERROR: Please define assembly to handle this mismatch\n";
     }
   }
   elsif($mt_assembly ne q{}) {
     $options->{'as'} = $mt_assembly;
   }
-  if(!defined $options->{'as'}) {
+  if(!defined $options->{'as'} || $options->{'as'} eq q{}) {
     die "ERROR: Please define assembly, not found in [CR|B]AM headers.\n";
   }
 }
