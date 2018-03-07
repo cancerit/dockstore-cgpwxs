@@ -156,7 +156,7 @@ do_parallel[cgpPindel]="pindel.pl \
  -g $REF_BASE/vagrent/codingexon_regions.indel.bed.gz \
  -st $PROTOCOL \
  -as $ASSEMBLY \
- -sp $SPECIES \
+ -sp '$SPECIES' \
  -e $CONTIG_EXCLUDE \
  -b $REF_BASE/pindel/HiDepth.bed.gz \
  -c $CPU \
@@ -174,7 +174,7 @@ do_parallel[CaVEMan]="caveman.pl \
  -b $REF_BASE/caveman/flagging \
  -ab $REF_BASE/vagrent \
  -u $REF_BASE/caveman \
- -s $SPECIES \
+ -s '$SPECIES' \
  -sa $ASSEMBLY \
  -t $CPU \
  -st $PROTOCOL \

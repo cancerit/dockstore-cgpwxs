@@ -16,7 +16,7 @@ VER_VCFTOOLS="0.1.15"
 VER_CGPPINDEL="v3.0.0"
 
 # cgpCaVEManPostProcessing
-VER_CGPCAVEPOSTPROC="1.8.0"
+VER_CGPCAVEPOSTPROC="1.8.1"
 # if issues found downgrade to 2.23.0 but can't find any use of bedtools coverage
 VER_BEDTOOLS="2.27.1"
 
