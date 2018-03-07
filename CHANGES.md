@@ -6,6 +6,7 @@
 * CaVEMan and cgpPindel updated to use fragment based counting.
   * You will need to update the reference pack to include the new flagging rules, see example `json`
   files
+* VAGrENT update to v3.3.0, only affects generation of annotation cache not use of existing ones.
 * Using build stages to shrink images.
 * remove legacy PRE/POST-EXEC from cgpbox days, use dockstore if you want file provisioning.
 
