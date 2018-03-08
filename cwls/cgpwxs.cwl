@@ -10,7 +10,7 @@ cwlVersion: v1.0
 
 doc: |
   ![build_status](https://quay.io/repository/wtsicgp/dockstore-cgpwxs/status)
-  A Docker container for the CGP WXS analysis flow. See the [dockstore-cgpwxs](https://github.com/cancerit/dockstore-cgpwxs) website for more information.
+  A Docker container for the CGP WXS analysis flow. See the [dockstore-cgpwxs](https://github.com/cancerit/dockstore-cgpwxs/blob/master/README.md) website for more information.
 
   Please read the relevant [changes](https://github.com/cancerit/dockstore-cgpwxs/blob/master/CHANGES.md)
   when upgrading.
