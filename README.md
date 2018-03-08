@@ -62,8 +62,6 @@ If not set detects available cores on system.
 
 ## Other uses
 
-xxx
-
 ### Native docker
 
 All of the tools installed as part of [dockstore-cgpmap][dockstore-cgpmap] and the above packages
@@ -119,6 +117,18 @@ via the options of `ds-cgpwxs.pl`
 The `examples/` contains test data that can be used to verify the tool.
 
 You can find expected outputs on the Sanger Institute FTP site (based on BAM+BAI inputs): [dockstore-cgpwxs-expected.tar.gz][cgpwxs-exp]
+
+## Development environment
+
+This project uses git pre-commit hooks.  Please enable them to prevent inappropriate large files
+being included.  Any pull request found not to have adhered to this will be rejected and the branch
+will need to be manually cleaned to keep the repo size down.
+
+Activate the hooks with
+
+```
+git config core.hooksPath git-hooks
+```
 
 ## Release process
 
