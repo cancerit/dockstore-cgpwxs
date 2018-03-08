@@ -20,6 +20,7 @@ associated annotation of VCF files.  This has been packaged specifically for use
 	- [Native docker](#native-docker)
 	- [Singularity](#singularity)
 	- [Test data](#test-data)
+- [Development environment](#development-environment)
 - [Release process](#release-process)
 - [LICENCE](#licence)
 
@@ -116,7 +117,8 @@ via the options of `ds-cgpwxs.pl`
 
 The `examples/` contains test data that can be used to verify the tool.
 
-You can find expected outputs on the Sanger Institute FTP site (based on BAM+BAI inputs): [dockstore-cgpwxs-expected.tar.gz][cgpwxs-exp]
+You can find expected outputs on the Sanger Institute FTP site (based on BAM+BAI inputs):
+[dockstore-cgpwxs-expected.tar.gz][cgpwxs-exp]
 
 ## Development environment
 
