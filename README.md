@@ -137,6 +137,9 @@ git config core.hooksPath git-hooks
 This project is maintained using HubFlow.
 
 1. Make appropriate changes
+1. Build image locally
+1. Run all example inputs and verify any changes are acceptable
+1. Update `expected/` tree with output of last step
 1. Bump version in `Dockerfile` and `Dockstore.cwl`
 1. Push changes
 1. Check state on Travis
