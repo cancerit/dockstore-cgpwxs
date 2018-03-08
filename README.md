@@ -19,7 +19,7 @@ associated annotation of VCF files.  This has been packaged specifically for use
 - [Other uses](#other-uses)
 	- [Native docker](#native-docker)
 	- [Singularity](#singularity)
-	- [Test data](#test-data)
+- [Verifying your deployment](#verifying-your-deployment)
 - [Development environment](#development-environment)
 - [Release process](#release-process)
 - [LICENCE](#licence)
@@ -113,12 +113,12 @@ By default results are written to the home directory of the container so ensure 
 a large volume and set the `-home` variable.  As indicated above the location can be overridden
 via the options of `ds-cgpwxs.pl`
 
-### Test data
+## Verifying your deployment
 
-The `examples/` contains test data that can be used to verify the tool.
+The `examples/` tree contains test json files populated with data that can be used to verify the
+tool.  More details can be found [here](examples/README.md).
 
-You can find expected outputs on the Sanger Institute FTP site (based on BAM+BAI inputs):
-[dockstore-cgpwxs-expected.tar.gz][cgpwxs-exp]
+The `expected/` tree contains the expected output for each tool.  More details can be found [here](expected/README.md).
 
 ## Development environment
 

@@ -1,11 +1,14 @@
 # Example parameters
 
-This area reflects the structure of the expected tree.
+An example json file exists for the various combinations of sequence input file (and index).
 
-Where a `*.json` file resides in examples you will find a corresponding folder here containing the
-unpacked result for executing the relevant workflow with that json example.
+For each `examples/<tool>/<params>.json` file there is a corresponding folder named
+`expected/<tool>/<params>/` containing the expected file listing for the result archive.
 
 e.g.
 
-`examples/cgpwxs/bam_bai.json` generates `result_WXS_bam_bai.tar.gz`, the content of which can be
-compared to `expected/cgpwxs/bam_bai`.
+* JSON: `examples/cgpwxs/bam_bai.json`
+  * Generates archive: `result_WXS_bam_bai.tar.gz`
+* Unpacked archive can be compared to: `expected/cgpwxs/bam_bai`
+
+See `expected/` [docs](../expected/README.md) for content of that area.
