@@ -1,6 +1,6 @@
 # CHANGES
 
-## NEXT
+## 3.0.0
 
 * See dockstore-cgpmap v3.0.0 (primarily adds mismatchQc)
 * CaVEMan and cgpPindel updated to use fragment based counting.
