@@ -9,17 +9,22 @@ label: "CGP WXS analysis flow"
 cwlVersion: v1.0
 
 doc: |
-    ![build_status](https://quay.io/repository/wtsicgp/dockstore-cgpwxs/status)
-    A Docker container for the CGP WXS analysis flow. See the [dockstore-cgpwxs](https://github.com/cancerit/dockstore-cgpwxs) website for more information.
+  ![build_status](https://quay.io/repository/wtsicgp/dockstore-cgpwxs/status)
+  A Docker container for the CGP WXS analysis flow. See the [dockstore-cgpwxs](https://github.com/cancerit/dockstore-cgpwxs/blob/master/README.md) website for more information.
 
-dct:creator:
-  "@id": "http://orcid.org/0000-0002-5634-1539"
-  foaf:name: Keiran M Raine
-  foaf:mbox: "keiranmraine@gmail.com"
+  Please read the relevant [changes](https://github.com/cancerit/dockstore-cgpwxs/blob/master/CHANGES.md)
+  when upgrading.
+
+  Parameters for a CWL definition are generally described in a json file, but parameters can be provided on the command line.
+
+  To see the parameters descriptions please run: cwltool --tool-help path_to.cwl
+
+  WARNING: The usual setting for 'exclude' is 'NC_007605,hs37d5,GL%' (human GRCh37/NCBI37). Examples
+  are configured to run as quickly as possible.
 
 requirements:
   - class: DockerRequirement
-    dockerPull: "quay.io/wtsicgp/dockstore-cgpwxs:2.1.1"
+    dockerPull: "quay.io/wtsicgp/dockstore-cgpwxs:3.0.0"
 
 hints:
   - class: ResourceRequirement
@@ -55,23 +60,37 @@ inputs:
   tumour:
     type: File
     secondaryFiles:
-    - .bai
     - .bas
-    doc: "Tumour BAM or CRAM file"
+    doc: "Tumour alignments file [bam|cram]"
     inputBinding:
       prefix: -tumour
       position: 4
       separate: true
 
+  tumourIdx:
+    type: File
+    doc: "Tumour alignment file index [bai|csi|crai]"
+    inputBinding:
+      prefix: -tidx
+      position: 5
+      separate: true
+
   normal:
     type: File
     secondaryFiles:
-    - .bai
     - .bas
-    doc: "Normal BAM or CRAM file"
+    doc: "Normal alignments file [bam|cram]"
     inputBinding:
       prefix: -normal
-      position: 5
+      position: 6
+      separate: true
+
+  normalIdx:
+    type: File
+    doc: "Normal alignment file index"
+    inputBinding:
+      prefix: -nidx
+      position: 7
       separate: true
 
   exclude:
@@ -79,7 +98,7 @@ inputs:
     doc: "Contigs to block during indel analysis"
     inputBinding:
       prefix: -exclude
-      position: 6
+      position: 8
       separate: true
       shellQuote: true
 
@@ -89,7 +108,7 @@ inputs:
     default: ''
     inputBinding:
       prefix: -species
-      position: 7
+      position: 9
       separate: true
       shellQuote: true
 
@@ -99,7 +118,7 @@ inputs:
     default: ''
     inputBinding:
       prefix: -assembly
-      position: 8
+      position: 10
       separate: true
       shellQuote: true
 
@@ -120,4 +139,19 @@ outputs:
     outputBinding:
       glob:  WXS_*_vs_*.timings.tar.gz
 
-baseCommand: ["/opt/wtsi-cgp/bin/ds-wrapper.pl"]
+baseCommand: ["/opt/wtsi-cgp/bin/ds-cgpwxs.pl"]
+
+$schemas:
+  - http://schema.org/docs/schema_org_rdfa.html
+
+$namespaces:
+  s: http://schema.org/
+
+s:codeRepository: https://github.com/cancerit/dockstore-cgpwxs
+s:license: https://spdx.org/licenses/AGPL-3.0-only
+
+s:author:
+  - class: s:Person
+    s:identifier: https://orcid.org/0000-0002-5634-1539
+    s:email: mailto:cgphelp@sanger.ac.uk
+    s:name: Keiran Raine

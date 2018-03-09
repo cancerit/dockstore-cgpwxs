@@ -9,30 +9,28 @@ fi
 set -u
 
 # cgpVcf
-VER_CGPVCF="v2.2.0"
-VER_VCFTOOLS="0.1.14"
+VER_CGPVCF="v2.2.1"
+VER_VCFTOOLS="0.1.15"
 
 # cgpPindel
-VER_CGPPINDEL="v2.2.4"
+VER_CGPPINDEL="v3.0.0"
 
 # cgpCaVEManPostProcessing
-VER_CGPCAVEPOSTPROC="1.6.9"
-# Warning bedtools 2.24.0 and 2.25.0 have a swapped usage in coverageBed
-# No upgrades until [this ticket](https://github.com/arq5x/bedtools2/issues/319) is resolved
-VER_BEDTOOLS="2.21.0"
+VER_CGPCAVEPOSTPROC="1.8.1"
+# if issues found downgrade to 2.23.0 but can't find any use of bedtools coverage
+VER_BEDTOOLS="2.27.1"
 
 # cgpCaVEManWrapper
-VER_CGPCAVEWRAP="1.12.0"
-VER_CAVEMAN="1.12.0"
+VER_CGPCAVEWRAP="1.13.0"
+VER_CAVEMAN="1.13.0"
 
 # VAGrENT
-VER_VAGRENT="v3.2.3"
+VER_VAGRENT="v3.3.0"
 
 if [ "$#" -lt "1" ] ; then
   echo "Please provide an installation path such as /opt/ICGC"
   exit 1
 fi
-
 
 # get path to this script
 SCRIPT_PATH=`dirname $0`;
@@ -57,7 +55,6 @@ else
 fi
 echo "Max compilation CPUs set to $CPU"
 
-
 SETUP_DIR=$INIT_DIR/install_tmp
 mkdir -p $SETUP_DIR/distro # don't delete the actual distro directory until the very end
 mkdir -p $INST_PATH/bin
@@ -75,10 +72,9 @@ set -u
 if [ ! -e $SETUP_DIR/vcftools.success ]; then
   curl -sSL --retry 10 https://github.com/vcftools/vcftools/releases/download/v${VER_VCFTOOLS}/vcftools-${VER_VCFTOOLS}.tar.gz > distro.tar.gz
   rm -rf distro/*
-  tar --strip-components 1 -C distro -xzf distro.tar.gz
+  tar --strip-components 2 -C distro -xzf distro.tar.gz
   cd distro
-  curl -sSL https://raw.githubusercontent.com/cancerit/cgpVcf/${VER_CGPVCF}/patches/vcfToolsProcessLog.diff | patch src/perl/Vcf.pm
-  ./configure --prefix=$INST_PATH --with-pmdir=$INST_PATH/lib/perl5
+  ./configure --prefix=$INST_PATH --with-pmdir=lib/perl5
   make -j$CPU
   make install
   cd $SETUP_DIR

@@ -4,11 +4,38 @@ notifications:
 
 sudo: false
 
+language: ruby
+
 services:
   - docker
 
 install:
- - docker build -t dockstore-cgpwxs .
+ - virtualenv -p python3 venv
+ - source venv/bin/activate
+ - pip install html5lib cwltool
 
 script:
+ # Validate CWL file(s)
+ - cwltool --validate cwls/cgpwxs.cwl
+ # Build and check docker image
+ - docker build -t dockstore-cgpwxs .
  - docker images | grep -c dockstore-cgpwxs
+ # Verify program from each inherited package is found (dockstore-cgpbigwig)
+ - docker run -t --rm dockstore-cgpwxs bwjoin --version
+ # Verify program from each inherited package is found (dockstore-cgpmap)
+ - docker run -t --rm dockstore-cgpwxs ds-cgpmap.pl -h
+ - docker run -t --rm dockstore-cgpwxs bwa_mem.pl -version
+ - docker run -t --rm dockstore-cgpwxs bammarkduplicates2 --version
+ - docker run -t --rm dockstore-cgpwxs samtools --version
+ - docker run -t --rm dockstore-cgpwxs bash -c 'bwa 2>&1 | grep Version'
+ # Verify a program from each new package is found (dockstore-cgpwxs)
+ - docker run -t --rm dockstore-cgpwxs ds-cgpwxs.pl -h
+ - docker run -t --rm dockstore-cgpwxs cgpVCFSplit.pl -version
+ - docker run -t --rm dockstore-cgpwxs vcftools --version
+ - docker run -t --rm dockstore-cgpwxs bedtools --version
+ - docker run -t --rm dockstore-cgpwxs bash -c 'pindel 2>&1 | grep Welcome'
+ - docker run -t --rm dockstore-cgpwxs pindel.pl -version
+ - docker run -t --rm dockstore-cgpwxs caveman --version
+ - docker run -t --rm dockstore-cgpwxs caveman.pl -version
+ - docker run -t --rm dockstore-cgpwxs cgpFlagCaVEMan.pl -version
+ - docker run -t --rm dockstore-cgpwxs AnnotateVcf.pl -version

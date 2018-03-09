@@ -49,12 +49,12 @@ set -e
 
 echo -e "\nStart workflow: `date`\n"
 
-declare -a PRE_EXEC
-declare -a POST_EXEC
-
-if [ -z ${PARAM_FILE+x} ] ; then
+if [[ $# -eq 1 ]] ; then
+  PARAM_FILE=$1
+elif [ -z ${PARAM_FILE+x} ] ; then
   PARAM_FILE=$HOME/run.params
 fi
+
 echo "Loading user options from: $PARAM_FILE"
 if [ ! -f $PARAM_FILE ]; then
   echo -e "\tERROR: file indicated by PARAM_FILE not found: $PARAM_FILE" 1>&2
@@ -62,10 +62,6 @@ if [ ! -f $PARAM_FILE ]; then
 fi
 source $PARAM_FILE
 env
-
-TMP=$OUTPUT_DIR/tmp
-mkdir -p $TMP
-mkdir -p $OUTPUT_DIR/timings
 
 if [ -z ${CPU+x} ]; then
   CPU=`grep -c ^processor /proc/cpuinfo`
@@ -77,44 +73,43 @@ fi
 echo -e "\tBAM_MT : $BAM_MT"
 echo -e "\tBAM_WT : $BAM_WT"
 
-if [ ${#PRE_EXEC[@]} -eq 0 ]; then
-  PRE_EXEC='echo No PRE_EXEC defined'
-fi
-
-if [ ${#POST_EXEC[@]} -eq 0 ]; then
-  POST_EXEC='echo No POST_EXEC defined'
-fi
-
 set -u
-mkdir -p $OUTPUT_DIR
 
-# run any pre-exec step before attempting to access BAMs
-# logically the pre-exec could be pulling them
-if [ ! -f $OUTPUT_DIR/pre-exec.done ]; then
-  echo -e "\nRun PRE_EXEC: `date`"
-
-  for i in "${PRE_EXEC[@]}"; do
-    set -x
-    $i
-    { set +x; } 2> /dev/null
-  done
-  touch $OUTPUT_DIR/pre-exec.done
-fi
+TMP=$OUTPUT_DIR/tmp
+mkdir -p $TMP
+mkdir -p $OUTPUT_DIR/timings
 
 ## get sample names from BAM headers
-NAME_MT=`samtools view -H $BAM_MT | perl -ne 'if($_ =~ m/^\@RG/) {($sm) = $_ =~m/\tSM:([^\t]+)/; print "$sm\n";}' | uniq`
-NAME_WT=`samtools view -H $BAM_WT | perl -ne 'if($_ =~ m/^\@RG/) {($sm) = $_ =~m/\tSM:([^\t]+)/; print "$sm\n";}' | uniq`
+NAME_MT=`samtools view -H $BAM_MT | perl -ne 'chomp; if($_ =~ m/^\@RG/) {($sm) = $_ =~m/\tSM:([^\t]+)/; print "$sm\n";}' | uniq`
+NAME_WT=`samtools view -H $BAM_WT | perl -ne 'chomp; if($_ =~ m/^\@RG/) {($sm) = $_ =~m/\tSM:([^\t]+)/; print "$sm\n";}' | uniq`
 
 echo -e "\tNAME_MT : $NAME_MT"
 echo -e "\tNAME_WT : $NAME_WT"
 
-BAM_MT_TMP=$TMP/$NAME_MT.bam
-BAM_WT_TMP=$TMP/$NAME_WT.bam
+# capture index extension type (assuming same from both)
+ALN_EXTN='bam'
+IDX_EXTN=''
+if [[ "$IDX_MT" == *.bam.bai ]]; then
+  IDX_EXTN='bam.bai'
+elif [[ "$IDX_MT" == *.bam.csi ]]; then
+  IDX_EXTN='bam.csi'
+elif [[ "$IDX_MT" == *.cram.crai ]]; then
+  IDX_EXTN='cram.crai'
+  ALN_EXTN='cram'
+else
+  echo "Alignment is not BAM or CRAM file: $" >&2
+  exit 1
+fi
+
+BAM_MT_TMP=$TMP/$NAME_MT.$ALN_EXTN
+IDX_MT_TMP=$TMP/$NAME_MT.$IDX_EXTN
+BAM_WT_TMP=$TMP/$NAME_WT.$ALN_EXTN
+IDX_WT_TMP=$TMP/$NAME_WT.$IDX_EXTN
 
 ln -fs $BAM_MT $BAM_MT_TMP
+ln -fs $IDX_MT $IDX_MT_TMP
 ln -fs $BAM_WT $BAM_WT_TMP
-ln -fs $BAM_MT.bai $BAM_MT_TMP.bai
-ln -fs $BAM_WT.bai $BAM_WT_TMP.bai
+ln -fs $IDX_WT $IDX_WT_TMP
 
 echo "Setting up Parallel block 1"
 
@@ -130,6 +125,14 @@ if [ ! -f "${BAM_WT}.bas" ]; then
   do_parallel[bas_WT]="bam_stats -i $BAM_WT_TMP -o $BAM_WT_TMP.bas"
 else
   ln -fs $BAM_WT.bas $BAM_WT_TMP.bas
+fi
+
+if [ "$ALN_EXTN" == "cram" ]; then
+  ## prime the cache
+  USER_CACHE=$OUTPUT_DIR/ref_cache
+  export REF_CACHE=$USER_CACHE/%2s/%2s/%s
+  export REF_PATH=$REF_CACHE:http://www.ebi.ac.uk/ena/cram/md5/%s
+  do_parallel[cache_POP]="seq_cache_populate.pl -root $USER_CACHE $REF_BASE/genome.fa"
 fi
 
 echo "Starting Parallel block 1: `date`"
@@ -153,8 +156,8 @@ do_parallel[cgpPindel]="pindel.pl \
  -g $REF_BASE/vagrent/codingexon_regions.indel.bed.gz \
  -st $PROTOCOL \
  -as $ASSEMBLY \
- -sp $SPECIES \
- -e $PINDEL_EXCLUDE \
+ -sp '$SPECIES' \
+ -e $CONTIG_EXCLUDE \
  -b $REF_BASE/pindel/HiDepth.bed.gz \
  -c $CPU \
  -sf $REF_BASE/pindel/softRules.lst"
@@ -171,7 +174,7 @@ do_parallel[CaVEMan]="caveman.pl \
  -b $REF_BASE/caveman/flagging \
  -ab $REF_BASE/vagrent \
  -u $REF_BASE/caveman \
- -s $SPECIES \
+ -s '$SPECIES' \
  -sa $ASSEMBLY \
  -t $CPU \
  -st $PROTOCOL \
@@ -185,7 +188,8 @@ do_parallel[CaVEMan]="caveman.pl \
  -f $REF_BASE/caveman/flagging/flag.to.vcf.convert.ini \
  -o $OUTPUT_DIR/${NAME_MT}_vs_${NAME_WT}/caveman \
  -np $PROTOCOL \
- -tp $PROTOCOL"
+ -tp $PROTOCOL \
+ -x $CONTIG_EXCLUDE"
 
 echo "Starting Parallel block 2: `date`"
 run_parallel $CPU do_parallel
@@ -214,18 +218,20 @@ run_parallel $CPU do_parallel
 # clean up log files
 rm -rf $OUTPUT_DIR/${NAME_MT}_vs_${NAME_WT}/*/logs
 
+# cleanup reference area, see ds-cgpwxs.pl
+if [ $CLEAN_REF -gt 0 ]; then
+  rm -rf $REF_BASE
+fi
+
+# cleanup ref cache
+if [ "$ALN_EXTN" == "cram" ]; then
+  rm -rf $USER_CACHE
+fi
+
 echo 'Package results'
 # timings first
-tar -C $OUTPUT_DIR -zcf ${PROTOCOL}_${NAME_MT}_vs_${NAME_WT}.timings.tar.gz timings
-tar -C $OUTPUT_DIR -zcf ${PROTOCOL}_${NAME_MT}_vs_${NAME_WT}.result.tar.gz ${NAME_MT}_vs_${NAME_WT}
-cp $PARAM_FILE ${PROTOCOL}_${NAME_MT}_vs_${NAME_WT}.run.params
-
-# run any post-exec step
-echo -e "\nRun POST_EXEC: `date`"
-for i in "${POST_EXEC[@]}"; do
-  set -x
-  $i
-  set +x
-done
+tar -C $OUTPUT_DIR -zcf $OUTPUT_DIR/${PROTOCOL}_${NAME_MT}_vs_${NAME_WT}.timings.tar.gz timings
+tar -C $OUTPUT_DIR -zcf $OUTPUT_DIR/${PROTOCOL}_${NAME_MT}_vs_${NAME_WT}.result.tar.gz ${NAME_MT}_vs_${NAME_WT}
+cp $PARAM_FILE $OUTPUT_DIR/${PROTOCOL}_${NAME_MT}_vs_${NAME_WT}.run.params
 
 echo -e "\nWorkflow end: `date`"
