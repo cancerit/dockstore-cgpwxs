@@ -49,12 +49,15 @@ $ wget https://raw.githubusercontent.com/cancerit/dockstore-cgpwxs/$DS_CGPWXS_TA
 $ zgrep -v '##contig' $VCF | cut --complement -f 3 > expected_${EXJS}_${ALG}.noid
 $ zgrep -v '##contig' $YOUR_UNPACKED | cut --complement -f 3 > mine_${EXJS}_${ALG}.noid
 $ diff -y --suppress-common-lines expected_${EXJS}.noid mine_${EXJS}.noid
+ ##cavemanVersion=1.12.1					      |	##cavemanVersion=1.13.0
+ ##fileDate=20180302					      |	##fileDate=20180309
+ ##source_20180302.1=AnnotateVcf.pl			      |	##source_20180309.1=AnnotateVcf.pl
  ##vcfProcessLog=<InputVCF=<.>,InputVCFSource=<CaVEMan>,InputV |	##vcfProcessLog=<InputVCF=<.>,InputVCFSource=<CaVEMan>,InputV
- ##vcfProcessLog_20180307.1=<InputVCF=<COLO-829_vs_COLO-829-BL |	##vcfProcessLog_20180307.1=<InputVCF=<COLO-829_vs_COLO-829-BL
- ##vcfProcessLog_20180307.2=<InputVCF=<>,InputVCFSource=<Annot |	##vcfProcessLog_20180307.2=<InputVCF=<>,InputVCFSource=<Annot
+ ##vcfProcessLog_20180302.1=<InputVCF=<COLO-829_vs_COLO-829-BL |	##vcfProcessLog_20180309.1=<InputVCF=<COLO-829_vs_COLO-829-BL
+ ##vcfProcessLog_20180302.2=<InputVCF=<>,InputVCFSource=<Annot |	##vcfProcessLog_20180309.2=<InputVCF=<>,InputVCFSource=<Annot
 ```
 
-You expect to see some diferences in the `##vcfProcessLog` lines due to dates and paths being different.
+You expect to see some differences in the headers relating to dates and paths, also if comparing between versions of caveman in pre-releases.
 
 ## Why not a tar.gz file?
 
