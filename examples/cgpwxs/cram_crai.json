@@ -1,0 +1,43 @@
+{
+  "reference": {
+    "path": "ftp://ftp.sanger.ac.uk/pub/cancer/dockstore/human/core_ref_GRCh37d5.tar.gz",
+    "class": "File"
+  },
+  "annot": {
+    "path": "ftp://ftp.sanger.ac.uk/pub/cancer/dockstore/human/VAGrENT_ref_GRCh37d5_ensembl_75.tar.gz",
+    "class": "File"
+  },
+  "snv_indel": {
+    "path": "ftp://ftp.sanger.ac.uk/pub/cancer/dockstore/human/SNV_INDEL_ref_GRCh37d5-fragment.tar.gz",
+    "class": "File"
+  },
+  "tumour": {
+    "path": "ftp://ngs.sanger.ac.uk/production/cancer/dockstore/cgpwxs/COLO-829_ex.cram",
+    "class": "File"
+  },
+  "tumourIdx": {
+    "path": "ftp://ngs.sanger.ac.uk/production/cancer/dockstore/cgpwxs/COLO-829_ex.cram.crai",
+    "class": "File"
+  },
+  "normal": {
+    "path": "ftp://ngs.sanger.ac.uk/production/cancer/dockstore/cgpwxs/COLO-829-BL_ex.cram",
+    "class": "File"
+  },
+  "normalIdx": {
+    "path": "ftp://ngs.sanger.ac.uk/production/cancer/dockstore/cgpwxs/COLO-829-BL_ex.cram.crai",
+    "class": "File"
+  },
+  "exclude": "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,22,X,Y,MT,NC_007605,hs37d5,GL%",
+  "result_archive": {
+    "path": "/tmp/result_WXS_cram_crai.tar.gz",
+    "class": "File"
+  },
+  "timings": {
+    "path": "/tmp/timings_WXS_cram_crai.tar.gz",
+    "class": "File"
+  },
+  "run_params": {
+    "path": "/tmp/params_WXS_cram_crai.params",
+    "class": "File"
+  }
+}
