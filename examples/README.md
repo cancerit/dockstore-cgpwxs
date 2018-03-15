@@ -11,4 +11,4 @@ e.g.
   * Generates archive: `result_WXS_bam_bai.tar.gz`
 * Unpacked archive can be compared to: `expected/cgpwxs/bam_bai`
 
-See `expected/` [docs](../expected/README.md) for content of that area.
+See [`expected/README.md`](../expected/README.md) for content of that area.

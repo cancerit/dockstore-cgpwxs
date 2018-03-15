@@ -14,7 +14,7 @@
 
 This area reflects the structure of the examples tree.
 
-See `examples/` [docs](../examples/README.md) for correlation to json param files.
+See [`examples/README.md`](../examples/README.md) for correlation to json param files.
 
 ### Files of 1 byte
 
@@ -28,9 +28,13 @@ purposes have been truncated to a size of 1 (newline char only).
 The primary files to compare are:
 
 1. `/COLO-829_vs_COLO-829-BL/caveman/COLO-829_vs_COLO-829-BL.annot.muts.vcf.gz`
-  * Annotated substitutions, `muts.ids.vcf.gz` and `flagged.muts.vcf.gz` are precursors, data only being added.
+  * Annotated substitutions
+  * `muts.ids.vcf.gz` and `flagged.muts.vcf.gz` are emptied as data is only added to generate
+    `*.annot.muts.vcf.gz`.
+1. `/COLO-829_vs_COLO-829-BL/caveman/COLO-829_vs_COLO-829-BL.snps.ids.vcf.gz`
 1. `/COLO-829_vs_COLO-829-BL/pindel/COLO-829_vs_COLO-829-BL.annot.vcf.gz`
-  * Annotated indels, `flagged.vcf.gz` is a precursor, data only being added.
+  * Annotated indels
+  * `*.flagged.vcf.gz` is emptied as data is only added to generate `*.annot.vcf.gz`.
 
 To compare files you need to strip the ID column as it is populated with UUIDs.
 
