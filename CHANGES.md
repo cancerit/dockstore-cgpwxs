@@ -1,5 +1,14 @@
 # CHANGES
 
+## 3.0.1
+
+Updates to relating to:
+
+* PCAP-core
+  * Add threaded processing to `bam_stats` to reduce overall runtime.
+* CaVEMan
+  * Fix bug in error handling and exit codes.
+
 ## 3.0.0
 
 * See dockstore-cgpmap v3.0.0 (primarily adds mismatchQc)
