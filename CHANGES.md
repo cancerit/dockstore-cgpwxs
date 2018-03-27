@@ -1,5 +1,12 @@
 # CHANGES
 
+## 3.0.2
+
+Bumps versions of dependencies to bring in
+
+* Official release of Bio-DB_HTS
+* Alternate use of tabix query to allow contigs with names containing colon.
+
 ## 3.0.1
 
 Updates to relating to:
