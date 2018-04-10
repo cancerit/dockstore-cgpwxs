@@ -13,10 +13,10 @@ VER_CGPVCF="v2.2.1"
 VER_VCFTOOLS="0.1.15"
 
 # cgpPindel
-VER_CGPPINDEL="v3.0.0"
+VER_CGPPINDEL="v3.0.1"
 
 # cgpCaVEManPostProcessing
-VER_CGPCAVEPOSTPROC="1.8.1"
+VER_CGPCAVEPOSTPROC="1.8.2"
 # if issues found downgrade to 2.23.0 but can't find any use of bedtools coverage
 VER_BEDTOOLS="2.27.1"
 
@@ -25,7 +25,7 @@ VER_CGPCAVEWRAP="1.13.2"
 VER_CAVEMAN="1.13.2"
 
 # VAGrENT
-VER_VAGRENT="v3.3.0"
+VER_VAGRENT="v3.3.2"
 
 if [ "$#" -lt "1" ] ; then
   echo "Please provide an installation path such as /opt/ICGC"
