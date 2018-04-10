@@ -1,4 +1,4 @@
-FROM  quay.io/wtsicgp/dockstore-cgpmap:3.0.2 as builder
+FROM  quay.io/wtsicgp/dockstore-cgpmap:3.0.3 as builder
 
 USER  root
 
@@ -33,7 +33,7 @@ MAINTAINER  cgphelp@sanger.ac.uk
 
 LABEL vendor="CASM/Cancer IT, Wellcome Sanger Institute"
 LABEL uk.ac.sanger.cgp.description="CGP WXS pipeline for dockstore.org"
-LABEL uk.ac.sanger.cgp.version="3.0.1"
+LABEL uk.ac.sanger.cgp.version="3.0.2"
 
 RUN apt-get -yq update
 RUN apt-get install -yq --no-install-recommends\
