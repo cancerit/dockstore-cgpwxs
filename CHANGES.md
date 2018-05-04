@@ -1,5 +1,10 @@
 # CHANGES
 
+## 3.0.3
+
+Bumps dockstore-cgpmap to include new version of dockstore-cgpbigwig for GRCh38
+support on generation of bigwig files.
+
 ## 3.0.2
 
 Bumps versions of dependencies to bring in
