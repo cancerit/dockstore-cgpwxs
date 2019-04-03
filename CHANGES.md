@@ -1,5 +1,16 @@
 # CHANGES
 
+## 3.1.0
+
+* Update to dockstore-cgpmap:3.1.0 for base image
+* Update dependencies to support fragment based read counts (and other fixes):
+  * cancerit/cgpPindel - v3.1.2
+  * cancerit/cgpCaVEManPostProcessing - 1.8.6
+  * cancerit/cgpCaVEManWrapper - 1.13.12
+  * cancerit/CaVEMan - 1.13.14
+  * cancerit/VAGrENT - v3.3.3
+* Drop `expected` tree, will be revising how verification of container is achieved.
+
 ## 3.0.3
 
 Bumps dockstore-cgpmap to include new version of dockstore-cgpbigwig for GRCh38
