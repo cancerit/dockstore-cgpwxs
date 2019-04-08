@@ -24,7 +24,7 @@ doc: |
 
 requirements:
   - class: DockerRequirement
-    dockerPull: "quay.io/wtsicgp/dockstore-cgpwxs:3.1.0"
+    dockerPull: "quay.io/wtsicgp/dockstore-cgpwxs:3.1.1"
 
 hints:
   - class: ResourceRequirement

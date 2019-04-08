@@ -1,5 +1,13 @@
 # CHANGES
 
+## 3.1.1
+
+* Update to dockstore-cgpmap:3.1.1 for base image
+* Bump vcftools to 0.1.16 - security
+* Allow jobs to resume when process scripts exist, long since proven double run doesn't occur
+* Ensure that ENA server is never used for CRAM processing
+* New versio of cgpCaVEManPostProcessing to solve memory problems in flagging when using BED files, also bumps vcftools
+
 ## 3.1.0
 
 * Update to dockstore-cgpmap:3.1.0 for base image
