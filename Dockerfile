@@ -67,7 +67,7 @@ ENV LANG en_US.UTF-8
 RUN mkdir -p $OPT
 COPY --from=builder $OPT $OPT
 
-COPY Threaded.pm $OPT/lib/perl/PCAP/Threaded.pm
+COPY Threaded.pm $OPT/lib/perl5/PCAP/Threaded.pm
 
 ADD scripts/analysisWXS.sh $OPT/bin/analysisWXS.sh
 ADD scripts/ds-cgpwxs.pl $OPT/bin/ds-cgpwxs.pl
