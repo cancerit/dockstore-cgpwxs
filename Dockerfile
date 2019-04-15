@@ -1,4 +1,4 @@
-FROM  quay.io/wtsicgp/dockstore-cgpmap:3.1.1 as builder
+FROM  quay.io/wtsicgp/dockstore-cgpmap:3.1.2 as builder
 
 USER  root
 
@@ -33,22 +33,26 @@ MAINTAINER  cgphelp@sanger.ac.uk
 
 LABEL vendor="CASM/Cancer IT, Wellcome Sanger Institute"
 LABEL uk.ac.sanger.cgp.description="CGP WXS pipeline for dockstore.org"
-LABEL uk.ac.sanger.cgp.version="3.1.1"
+LABEL uk.ac.sanger.cgp.version="3.1.2"
 
 RUN apt-get -yq update
-RUN apt-get install -yq --no-install-recommends\
-  apt-transport-https\
-  locales\
-  curl\
-  ca-certificates\
-  libperlio-gzip-perl\
-  bzip2\
-  psmisc\
-  time\
-  zlib1g\
-  liblzma5\
-  libncurses5\
-  p11-kit
+RUN apt-get install -yq --no-install-recommends \
+apt-transport-https \
+locales \
+curl \
+ca-certificates \
+libperlio-gzip-perl \
+bzip2 \
+psmisc \
+time \
+zlib1g \
+liblzma5 \
+libncurses5 \
+p11-kit \
+unattended-upgrades && \
+unattended-upgrade -d -v && \
+apt-get remove -yq unattended-upgrades && \
+apt-get autoremove -yq
 
 RUN locale-gen en_US.UTF-8
 RUN update-locale LANG=en_US.UTF-8
