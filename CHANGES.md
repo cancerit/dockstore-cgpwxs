@@ -1,5 +1,13 @@
 # CHANGES
 
+## 3.1.2
+
+* Add security updates to image build
+* Update base image to dockstore-cgpmap:3.1.2
+* Update caveman related versions to pick up hotfix to protect against corrupt index files
+  * CaVEMan 1.13.15
+  * cgpCaVEManWrapper 1.13.13 (just to keep in sync)
+
 ## 3.1.1
 
 * Update to dockstore-cgpmap:3.1.1 for base image
