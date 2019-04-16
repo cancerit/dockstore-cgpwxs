@@ -1,5 +1,9 @@
 # CHANGES
 
+## 3.1.3
+
+* Update base image to dockstore-cgpmap:3.1.4
+
 ## 3.1.2
 
 * Add security updates to image build
