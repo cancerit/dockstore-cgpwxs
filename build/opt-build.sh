@@ -25,7 +25,7 @@ VER_CGPCAVEWRAP="1.13.13"
 VER_CAVEMAN="1.13.15"
 
 # VAGrENT
-VER_VAGRENT="v3.3.3"
+VER_VAGRENT="v3.3.4"
 
 if [ "$#" -lt "1" ] ; then
   echo "Please provide an installation path such as /opt/ICGC"
