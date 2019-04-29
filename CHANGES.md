@@ -1,5 +1,9 @@
 # CHANGES
 
+## 3.1.5
+
+* Update cgpCaVEManWrapper to allow parallel flagging in cgpwgs layer
+
 ## 3.1.4
 
 * Update VAGrENT to v3.3.4 specifically to fix https://github.com/cancerit/VAGrENT/issues/33
