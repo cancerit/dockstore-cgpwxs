@@ -1,5 +1,9 @@
 # CHANGES
 
+## 3.1.7
+
+* updated CWL metadata schema IRI
+
 ## 3.1.6
 
 * Update to cgpPindel [v3.2.0](https://github.com/cancerit/cgpPindel/releases/tag/v3.2.0)

@@ -33,7 +33,7 @@ MAINTAINER  cgphelp@sanger.ac.uk
 
 LABEL vendor="CASM/Cancer IT, Wellcome Sanger Institute"
 LABEL uk.ac.sanger.cgp.description="CGP WXS pipeline for dockstore.org"
-LABEL uk.ac.sanger.cgp.version="3.1.6"
+LABEL uk.ac.sanger.cgp.version="3.1.7"
 
 RUN apt-get -yq update
 RUN apt-get install -yq --no-install-recommends \
